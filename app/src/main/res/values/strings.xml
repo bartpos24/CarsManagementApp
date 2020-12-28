@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">CarsManagementApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+
+    //Login activity
+    <string name="email_editText">Email</string>
+    <string name="password_editText">Password</string>
+    <string name="login_text">Login</string>
+    <string name="signUp_text">"Don't have account"</string>
+    <string name="e_enter_mail">Please enter a email</string>
+    <string name="e_enter_valid_mail">Please enter valid email</string>
+    <string name="e_enter_password">Please enter a password</string>
+    <string name="e_login_fail">Login failed! Check email and password!</string>
+
+    //Register activity
+    <string name="register_button">Register</string>
+    <string name="e_password_requirements">Password must has minimum 6 characters</string>
+    <string name="p_register_success">Registration successful</string>
+    <string name="e_sign_up_fail">Sign Up failed. Try again.</string>
+    <string name="sample_data">Sample data</string>
+    <string name="name_editText">Name</string>
+    <string name="e_enter_name">Please enter a name</string>
+    <string name="surname_editText">Surname</string>
+    <string name="e_enter_surname">Please enter a surname</string>
+    <string name="passwordRepeat">Repeat password</string>
+    <string name="e_repeatPassword">Passwords are not the same!</string>
+    <string name="e_email_exists">Exists account with this email</string>
+
+    <string name="menu_home">Home</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    //fragment strings
+
+    <string name="nav_statistic">Statistics</string>
+    <string name="nav_prognosis">Prognosis</string>
+    <string name="nav_cars">Cars</string>
+    <string name="nav_addCar">Add Car</string>
+
+    //fragment AddCar
+    <string name="brandEditText">Brand</string>
+    <string name="modelEditText">Model</string>
+    <string name="capEditText">Cap.</string>
+    <string name="powerEditText">Power</string>
+    <string name="yearEditText">Year</string>
+    <string name="colorEditText">Color</string>
+    <string name="addCarButton">Add Car</string>
+    <string name="doubleError">Please enter double data</string>
+    <string name="intError">Please enter Integer data</string>
+    <string name="yearError">Please enter Integer year</string>
+    <string name="error">Please enter invalid data</string>
+    
+    //Spinner strings
+    <string-array name="engType">
+        <item>DIESEL</item>
+        <item>BENZINE</item>
+        <item>LPG</item>
+        <item>ELECTRIC</item>
+        <item>HYBRID</item>
+    </string-array>
+
+    <string-array name="carType">
+        <item>HETCHABCK</item>
+        <item>SEDAN</item>
+        <item>COMBI</item>
+        <item>SUV</item>
+        <item>CABRIOLET</item>
+        <item>VAN</item>
+        <item>PICKUP</item>
+        <item>COUPE</item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.addCar.AddCar">
+
+
+    <EditText
+        android:id="@+id/brandEditText"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/brandEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/modelEditText"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/modelEditText"
+
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/brandEditText" />
+
+    <EditText
+        android:id="@+id/capEditText"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/capEditText"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modelEditText" />
+    <TextView
+        android:id="@+id/capTextView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="dm3"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@+id/capEditText"
+        app:layout_constraintTop_toBottomOf="@+id/modelEditText" />
+
+    <EditText
+        android:id="@+id/powerEditText"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/powerEditText"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintStart_toEndOf="@+id/capTextView"
+        app:layout_constraintTop_toBottomOf="@+id/modelEditText" />
+
+    <TextView
+        android:id="@+id/powerTextView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="KM"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="239dp"
+        tools:layout_editor_absoluteY="255dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@+id/powerEditText"
+        app:layout_constraintTop_toBottomOf="@+id/modelEditText"/>
+
+    <EditText
+        android:id="@+id/yearEditText"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/yearEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/capEditText" />
+
+    <EditText
+        android:id="@+id/colorEditText"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/colorEditText"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        app:layout_constraintStart_toEndOf="@+id/yearEditText"
+        app:layout_constraintTop_toBottomOf="@+id/powerEditText" />
+
+    <Spinner
+        android:id="@+id/engTypeSpinner"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yearEditText" />
+
+    <Spinner
+        android:id="@+id/carTypeSpinner"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/engTypeSpinner" />
+
+    <Button
+        android:id="@+id/addCarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addCarButton"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carTypeSpinner" />
+    <TextView
+        android:id="@+id/modelTextView"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:text="KM"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="239dp"
+        tools:layout_editor_absoluteY="255dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintStart_toEndOf="@+id/colorEditText"
+        app:layout_constraintTop_toBottomOf="@+id/powerTextView"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

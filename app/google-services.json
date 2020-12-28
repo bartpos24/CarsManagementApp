@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "610493406534",
+    "firebase_url": "https://carsmanagementapp.firebaseio.com",
+    "project_id": "carsmanagementapp",
+    "storage_bucket": "carsmanagementapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610493406534:android:f31e00d93d93aa8c711947",
+        "android_client_info": {
+          "package_name": "com.example.carsmanagementapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610493406534-rnlt38evag7k3ctepmeedrsg2oq2c8c4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqmaF9B5RgjhgwgisPQ2trNBtLKE7tANM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610493406534-rnlt38evag7k3ctepmeedrsg2oq2c8c4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

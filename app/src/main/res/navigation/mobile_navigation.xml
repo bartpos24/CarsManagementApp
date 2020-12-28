@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_prognosis">
+
+    <fragment
+        android:id="@+id/nav_prognosis"
+        android:name="com.example.carsmanagementapp.ui.prognosis.PrognosisFragment"
+        android:label="@string/nav_prognosis"
+        tools:layout="@layout/statistics_fragment" />
+    <fragment
+        android:id="@+id/nav_statistics"
+        android:name="com.example.carsmanagementapp.ui.statistics.StatisticsFragment"
+        android:label="@string/nav_statistic"
+        tools:layout="@layout/prognosis_fragment" />
+    <fragment
+        android:id="@+id/nav_cars"
+        android:name="com.example.carsmanagementapp.ui.cars.CarsFragment"
+        android:label="@string/nav_cars"
+        tools:layout="@layout/cars_fragment" />
+    <fragment
+        android:id="@+id/nav_addCar"
+        android:name="com.example.carsmanagementapp.ui.addCar.AddCar"
+        android:label="@string/nav_addCar"
+        tools:layout="@layout/fragment_add_car" />
+
+
+</navigation>

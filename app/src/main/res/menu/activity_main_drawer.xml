@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_prognosis"
+            android:icon="@drawable/ic_chart"
+            android:title="@string/nav_prognosis" />
+        <item
+            android:id="@+id/nav_statistics"
+            android:icon="@drawable/ic_table"
+            android:title="@string/nav_statistic" />
+        <item
+            android:id="@+id/nav_cars"
+            android:icon="@drawable/ic_car"
+            android:title="@string/nav_cars" />
+        <item
+            android:id="@+id/nav_addCar"
+            android:icon="@drawable/ic_car"
+            android:title="@string/nav_addCar" />
+
+    </group>
+</menu>
