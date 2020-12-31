@@ -1,6 +1,6 @@
 package com.example.carsmanagementapp.ui.cars
 
-import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.carsmanagementapp.Model.Car
 import com.google.firebase.auth.FirebaseAuth
@@ -11,51 +11,32 @@ class CarsViewModel : ViewModel() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
+    var carList: ArrayList<Car> = ArrayList<Car>()
 
-    var actualListOfCars = ArrayList<Car>()
-    private var maxId = 0
-
-    private var ref: DatabaseReference = database.getReference("Cars")
-
-    fun loadDatabase() {
-        var getData = object : ValueEventListener {
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (h in snapshot.children) {
-                    var car = h.getValue(Car::class.java)
-                    actualListOfCars.add(car!!)
-                }
-            }
-        }
-        ref.child(auth.currentUser!!.uid).child("ActualCars")
-        ref.addValueEventListener(getData)
-        ref.addListenerForSingleValueEvent(getData)
-    }
+    var actualListOfCar: MutableLiveData<ArrayList<Car>> = MutableLiveData()
 
 
 
+    private lateinit var ref: DatabaseReference
 
-
-
-
-
-    fun addCar(newCar: Car) {
-        ref.addValueEventListener(object: ValueEventListener {
+    fun loadDatabase(){
+        ref = database.getReference("Cars").child(auth.currentUser!!.uid).child("ActualCars")
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists())
-                    maxId = snapshot.childrenCount.toInt()
+                if (snapshot.exists()) {
+                    carList.clear()
+                    for (h in snapshot.children) {
+                        var car = h.getValue(Car::class.java)
+                        carList.add(car!!)
+                    }
+                    actualListOfCar.value = carList
+                }
             }
         })
-        newCar.id = maxId
-        actualListOfCars.add(newCar)
-        ref.child(auth.currentUser!!.uid).child("ActualCars").setValue(actualListOfCars)
     }
 
 }

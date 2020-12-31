@@ -54,7 +54,7 @@
     <string name="intError">Please enter Integer data</string>
     <string name="yearError">Please enter Integer year</string>
     <string name="error">Please enter invalid data</string>
-    
+
     //Spinner strings
     <string-array name="engType">
         <item>DIESEL</item>

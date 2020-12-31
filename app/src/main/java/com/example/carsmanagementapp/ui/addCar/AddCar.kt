@@ -70,16 +70,14 @@ class AddCar : Fragment() {
         carAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         carTypeSpinner.adapter = carAdapter
 
-        addCarViewModel.loadDatabase()
-        //Log.e("MSS", addCarViewModel.actualListOfCars.value.toString())
 
-        /*val car1 = Car(1, "Opel", "Astra", CarType.NONE, 1.8, 120,2008, EngineType.BENZINE, "Black")
+        /*val car1 = Car(1, "Opel", "Astra", CarType.CABRIOLET, 1.8, 120,2008, EngineType.BENZINE, "Black")
         addCarViewModel.addCar(car1)
         val car2 = Car(1, "Audi", "Q7", CarType.SUV, 4.0, 325,2013, EngineType.DIESEL, "Black")
         addCarViewModel.addCar(car2)
         val car3 = Car(1, "Audi", "Q7", CarType.SUV, 4.0, 325,2014, EngineType.DIESEL, "White")
-        addCarViewModel.addCar(car3)*/
-        /*val car4 = Car(1, "Toyota", "Rav4", CarType.SUV, 2.0, 170,2020, EngineType.BENZINE, "White")
+        addCarViewModel.addCar(car3)
+        val car4 = Car(1, "Toyota", "Rav4", CarType.SUV, 2.0, 170,2020, EngineType.BENZINE, "White")
         addCarViewModel.addCar(car4)
         val car5 = Car(1, "Skoda", "Octavia", CarType.COMBI, 1.9, 90,1999, EngineType.DIESEL, "Srebrny")
         addCarViewModel.addCar(car5)
@@ -88,49 +86,60 @@ class AddCar : Fragment() {
         val car7 = Car(1, "Honda", "Civic", CarType.HETCHABCK, 1.4, 86,2006, EngineType.BENZINE, "Brąz")
         addCarViewModel.addCar(car7)
         val car8 = Car(1, "Volkswagen", "Passat", CarType.SEDAN, 2.0, 170,2010, EngineType.BENZINE, "Srebrny")
-        addCarViewModel.addCar(car8)*/
-       /* val car9 = Car(1, "Fiat", "126p", CarType.HETCHABCK, 0.6, 40,1997, EngineType.BENZINE, "Red")
+        addCarViewModel.addCar(car8)
+        val car9 = Car(1, "Fiat", "126p", CarType.HETCHABCK, 0.6, 40,1997, EngineType.BENZINE, "Red")
         addCarViewModel.addCar(car9)
         val car10 = Car(1, "Alfa", "Romeo", CarType.HETCHABCK, 2.0, 170,2010, EngineType.BENZINE, "Srebrny")
         addCarViewModel.addCar(car10)*/
 
-        addCarButton.setOnClickListener {
-            /*ref = ref.child(auth.currentUser!!.uid).child("ActualCars")
-            ref.addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
+        engTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
 
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    for (h in snapshot.children) {
-                        val car = h.getValue(Car::class.java)
-                        addCarViewModel.carList.add(car!!)
-                    }
-                    modelTextView.text = addCarViewModel.carList[0].model.toString()
-                }
-            })*/
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                engSelectedView(position)
+            }
+        }
+        carTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                carSelectedView(position)
+            }
+        }
+
+        addCarButton.setOnClickListener {
 
             var cap = capSelectedView()
             var pow = powerSelectedView()
             var year = yearSelectedView()
-            engSelectedView()
-            carSelectedView()
-            if (cap != 0.0 && pow != 0) {
-                val car = Car(0,brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, cap, pow, year, typeOfEngine, colorEditText.text.toString())
+            if (cap != 0.0 && pow != 0 && year != 0 && typeOfEngine != EngineType.NONE && typeOfCar != CarType.NONE) {
+                val car = Car("", brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, cap, pow, year, typeOfEngine, colorEditText.text.toString())
                 addCarViewModel.addCar(car)
+                Toast.makeText(mContext, "Add ${car.brand} ${car.model}", Toast.LENGTH_LONG).show()
             }
+            else
+                Toast.makeText(mContext, "Adding failed, try again.", Toast.LENGTH_LONG).show()
 
 
         }
 
-
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
-        //addCarViewModel.loadDatabase()
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -143,71 +152,41 @@ class AddCar : Fragment() {
         // TODO: Use the ViewModel
     }
 
-    fun engSelectedView() {
-        engTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                Toast.makeText(mContext, "Please select engine type", Toast.LENGTH_LONG).show()
-            }
+    fun engSelectedView(position: Int): EngineType{
+        if (position == 0)
+            typeOfEngine = EngineType.DIESEL
+        else if (position == 1)
+            typeOfEngine = EngineType.BENZINE
+        else if (position == 2)
+            typeOfEngine = EngineType.LPG
+        else if (position == 3)
+            typeOfEngine = EngineType.ELECTRIC
+        else if (position == 4)
+            typeOfEngine = EngineType.HYBRID
+        else
+            Toast.makeText(mContext, "Error engine type", Toast.LENGTH_LONG).show()
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (position == 0)
-                    typeOfEngine = EngineType.DIESEL
-                else if (position == 1)
-                    typeOfEngine = EngineType.BENZINE
-                else if (position == 2)
-                    typeOfEngine = EngineType.LPG
-                else if (position == 3)
-                    typeOfEngine = EngineType.ELECTRIC
-                else if (position == 4)
-                    typeOfEngine = EngineType.HYBRID
-                else
-                    Toast.makeText(mContext, "Please check engine type", Toast.LENGTH_LONG).show()
-
-            }
-        }
+        return typeOfEngine
     }
-    fun carSelectedView() {
-
-
-        carTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                Toast.makeText(mContext, "Please select body car type", Toast.LENGTH_LONG).show()
-            }
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (position == 0)
-                    typeOfCar = CarType.HETCHABCK
-                else if (position == 1)
-                    typeOfCar = CarType.SEDAN
-                else if (position == 2)
-                    typeOfCar = CarType.COMBI
-                else if (position == 3)
-                    typeOfCar = CarType.SUV
-                else if (position == 4)
-                    typeOfCar = CarType.CABRIOLET
-                else if (position == 5)
-                    typeOfCar = CarType.VAN
-                else if (position == 6)
-                    typeOfCar = CarType.PICKUP
-                else if (position == 7)
-                    typeOfCar = CarType.COUPE
-                else
-                    Toast.makeText(mContext, "Please check engine type", Toast.LENGTH_LONG).show()
-
-                Toast.makeText(mContext, position.toString(), Toast.LENGTH_LONG).show()
-
-            }
-        }
+    fun carSelectedView(position: Int) {
+        if (position == 0)
+            typeOfCar = CarType.HETCHABCK
+        else if (position == 1)
+            typeOfCar = CarType.SEDAN
+        else if (position == 2)
+            typeOfCar = CarType.COMBI
+        else if (position == 3)
+            typeOfCar = CarType.SUV
+        else if (position == 4)
+            typeOfCar = CarType.CABRIOLET
+        else if (position == 5)
+            typeOfCar = CarType.VAN
+        else if (position == 6)
+            typeOfCar = CarType.PICKUP
+        else if (position == 7)
+            typeOfCar = CarType.COUPE
+        else
+            Toast.makeText(mContext, "Error car type", Toast.LENGTH_LONG).show()
     }
     fun capSelectedView(): Double {
         var capacity: Double = 0.0
