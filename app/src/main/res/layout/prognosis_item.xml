@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+
+    android:layout_height="120dp">
+
+    <TextView
+        android:id="@+id/brandPrognosisTV"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/modelPrognosisTV"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/brandPrognosisTV" />
+
+    <TextView
+        android:id="@+id/capPrognosisTV"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/brandPrognosisTV"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/powerPrognosisTV"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/capPrognosisTV"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/colorPrognosisTV"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/powerPrognosisTV"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/yearPrognosisTV"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/modelPrognosisTV"
+        app:layout_constraintTop_toBottomOf="@+id/capPrognosisTV" />
+    <TextView
+        android:id="@+id/engPrognosisTV"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/yearPrognosisTV"
+        app:layout_constraintTop_toBottomOf="@+id/powerPrognosisTV" />
+
+    <TextView
+        android:id="@+id/carPrognosisTV"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/engPrognosisTV"
+        app:layout_constraintTop_toBottomOf="@+id/colorPrognosisTV" />
+</androidx.constraintlayout.widget.ConstraintLayout>

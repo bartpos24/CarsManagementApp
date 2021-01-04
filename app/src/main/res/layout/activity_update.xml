@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.cars.dateails.update.UpdateActivity">
+
+
+    <TextView
+        android:id="@+id/brandUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="@string/brand"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/brandEditTextUp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="60dp"
+        android:gravity="center"
+        android:ems="10"
+        android:hint="@string/brandEditText"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/modelUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/model"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/brandUp" />
+
+    <EditText
+        android:id="@+id/modelEditTextUp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="60dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/modelEditText"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/brandEditTextUp" />
+
+    <TextView
+        android:id="@+id/capacityUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/capacity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modelUp" />
+
+    <EditText
+        android:id="@+id/capEditTextUp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/capEditText"
+        android:inputType="textPersonName"
+        android:layout_marginLeft="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/capacityUp" />
+
+    <TextView
+        android:id="@+id/capTextView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="dm3"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/capEditTextUp"
+        app:layout_constraintTop_toBottomOf="@+id/capacityUp" />
+
+    <TextView
+        android:id="@+id/powerUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/power"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modelEditTextUp" />
+
+    <EditText
+        android:id="@+id/powerEditTextUp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/powerEditText"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/powerTextView"
+        app:layout_constraintTop_toBottomOf="@+id/powerUp" />
+
+    <TextView
+        android:id="@+id/powerTextView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="60dp"
+        android:gravity="center"
+        android:text="KM"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/powerUp" />
+
+
+    <TextView
+        android:id="@+id/yearUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/year"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/capEditTextUp" />
+
+    <EditText
+        android:id="@+id/yearEditTextUp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/yearEditText"
+        android:inputType="textPersonName"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/powerEditTextUp" />
+
+    <TextView
+        android:id="@+id/colorUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/color"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yearUp" />
+
+    <EditText
+        android:id="@+id/colorEditTextUp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/colorEditText"
+        android:inputType="textPersonName"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yearEditTextUp" />
+
+    <TextView
+        android:id="@+id/engineTypeUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/engType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colorUp" />
+
+    <Spinner
+        android:id="@+id/engTypeSpinnerUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_marginLeft="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/engineTypeUp" />
+
+    <TextView
+        android:id="@+id/carTypeUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/engType"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colorEditTextUp" />
+
+    <Spinner
+        android:id="@+id/carTypeSpinnerUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carTypeUp" />
+
+    <Button
+        android:id="@+id/updateBtnUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="@string/updateBtn"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/engTypeSpinnerUp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

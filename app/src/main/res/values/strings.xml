@@ -75,5 +75,18 @@
         <item>COUPE</item>
     </string-array>
 
+    //Details activity
+    <string name="brand">Brand</string>
+    <string name="model">Model</string>
+    <string name="year">Year of production</string>
+    <string name="capacity">Capacity</string>
+    <string name="power">Power</string>
+    <string name="color">Color</string>
+    <string name="carType">Car type</string>
+    <string name="engType">Engine type</string>
+    <string name="updateBtn">Update Car</string>
+    <string name="deleteBtn">Delete Car</string>
+    <string name="soldBtn">Sold Car</string>
+
 
 </resources>

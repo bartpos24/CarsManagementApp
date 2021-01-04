@@ -78,4 +78,18 @@
     </string-array>
 
 
+    //Details activity
+    <string name="brand">Marka</string>
+    <string name="model">Model</string>
+    <string name="year">Rok produkcji</string>
+    <string name="capacity">Pojemność</string>
+    <string name="power">Moc</string>
+    <string name="color">Kolor</string>
+    <string name="carType">Typ samochodu</string>
+    <string name="engType">Typ silnika</string>
+    <string name="updateBtn">Aktualizuj samochód</string>
+    <string name="deleteBtn">Usuń samochód</string>
+    <string name="soldBtn">Sprzedaj samochód</string>
+
+
 </resources>

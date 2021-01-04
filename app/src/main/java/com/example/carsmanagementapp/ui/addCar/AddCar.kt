@@ -71,25 +71,25 @@ class AddCar : Fragment() {
         carTypeSpinner.adapter = carAdapter
 
 
-        /*val car1 = Car(1, "Opel", "Astra", CarType.CABRIOLET, 1.8, 120,2008, EngineType.BENZINE, "Black")
+        /*val car1 = Car("", "Opel", "Astra", CarType.CABRIOLET, 1.8, 120,2008, EngineType.BENZINE, "Black")
         addCarViewModel.addCar(car1)
-        val car2 = Car(1, "Audi", "Q7", CarType.SUV, 4.0, 325,2013, EngineType.DIESEL, "Black")
+        val car2 = Car("", "Audi", "Q7", CarType.SUV, 4.0, 325,2013, EngineType.DIESEL, "Black")
         addCarViewModel.addCar(car2)
-        val car3 = Car(1, "Audi", "Q7", CarType.SUV, 4.0, 325,2014, EngineType.DIESEL, "White")
+        val car3 = Car("", "Audi", "Q7", CarType.SUV, 4.0, 325,2014, EngineType.DIESEL, "White")
         addCarViewModel.addCar(car3)
-        val car4 = Car(1, "Toyota", "Rav4", CarType.SUV, 2.0, 170,2020, EngineType.BENZINE, "White")
+        val car4 = Car("", "Toyota", "Rav4", CarType.SUV, 2.0, 170,2020, EngineType.BENZINE, "White")
         addCarViewModel.addCar(car4)
-        val car5 = Car(1, "Skoda", "Octavia", CarType.COMBI, 1.9, 90,1999, EngineType.DIESEL, "Srebrny")
+        val car5 = Car("", "Skoda", "Octavia", CarType.COMBI, 1.9, 90,1999, EngineType.DIESEL, "Srebrny")
         addCarViewModel.addCar(car5)
-        val car6 = Car(1, "Citroen", "C5", CarType.SEDAN, 2.0, 150,20010, EngineType.DIESEL, "Black")
+        val car6 = Car("", "Citroen", "C5", CarType.SEDAN, 2.0, 150,20010, EngineType.DIESEL, "Black")
         addCarViewModel.addCar(car6)
-        val car7 = Car(1, "Honda", "Civic", CarType.HETCHABCK, 1.4, 86,2006, EngineType.BENZINE, "Brąz")
+        val car7 = Car("", "Honda", "Civic", CarType.HETCHABCK, 1.4, 86,2006, EngineType.BENZINE, "Brąz")
         addCarViewModel.addCar(car7)
-        val car8 = Car(1, "Volkswagen", "Passat", CarType.SEDAN, 2.0, 170,2010, EngineType.BENZINE, "Srebrny")
+        val car8 = Car("", "Volkswagen", "Passat", CarType.SEDAN, 2.0, 170,2010, EngineType.BENZINE, "Srebrny")
         addCarViewModel.addCar(car8)
-        val car9 = Car(1, "Fiat", "126p", CarType.HETCHABCK, 0.6, 40,1997, EngineType.BENZINE, "Red")
+        val car9 = Car("", "Fiat", "126p", CarType.HETCHABCK, 0.6, 40,1997, EngineType.BENZINE, "Red")
         addCarViewModel.addCar(car9)
-        val car10 = Car(1, "Alfa", "Romeo", CarType.HETCHABCK, 2.0, 170,2010, EngineType.BENZINE, "Srebrny")
+        val car10 = Car("", "Alfa", "Romeo", CarType.HETCHABCK, 2.0, 170,2010, EngineType.BENZINE, "Srebrny")
         addCarViewModel.addCar(car10)*/
 
         engTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

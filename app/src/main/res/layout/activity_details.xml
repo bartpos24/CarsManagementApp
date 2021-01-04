@@ -10,7 +10,7 @@
         android:id="@+id/brand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/brand"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="50dp"
@@ -32,7 +32,7 @@
         android:id="@+id/model"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/model"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
         android:id="@+id/color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/color"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,7 @@
         android:id="@+id/year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/year"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,7 @@
         android:id="@+id/power"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/power"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,7 @@
         android:id="@+id/engineType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/engType"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +140,7 @@
         android:id="@+id/carType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/carType"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -161,7 +161,7 @@
         android:id="@+id/capacity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/capacity"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -179,6 +179,36 @@
         app:layout_constraintStart_toEndOf="@+id/engineType"
         app:layout_constraintTop_toBottomOf="@+id/carTypeDetailsTV"/>
 
+    <Button
+        android:id="@+id/updateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/updateBtn"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/capacity" />
+
+    <Button
+        android:id="@+id/soldButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/soldBtn"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        app:layout_constraintStart_toEndOf="@+id/updateButton"
+        app:layout_constraintTop_toBottomOf="@+id/capacityDetailsTV" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"
+        android:text="@string/deleteBtn"
+        android:layout_marginLeft="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/capacityDetailsTV" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
