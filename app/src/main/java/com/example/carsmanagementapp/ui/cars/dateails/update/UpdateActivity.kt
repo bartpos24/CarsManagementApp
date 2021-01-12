@@ -80,12 +80,24 @@ class UpdateActivity : AppCompatActivity() {
             var pow = powerSelectedView()
             var year = yearSelectedView()
             if (cap != 0.0 && pow != 0 && year != 0 && typeOfEngine != EngineType.NONE && typeOfCar != CarType.NONE) {
-                val car = Car(car.id, brandET.text.toString(), modelET.text.toString(), typeOfCar, cap, pow, year, typeOfEngine, colorET.text.toString())
-                updateViewModel.updateCar(car)
-                Toast.makeText(this, "Update ${car.brand} ${car.model}", Toast.LENGTH_LONG).show()
+                if (brandET.text.toString() == "") {
+                    brandET.error = resources.getString(R.string.brandError)
+                }
+                else if (modelET.text.toString() == "") {
+                    modelET.error = resources.getString(R.string.modelError)
+                }
+                else if (colorET.text.toString() == "") {
+                    colorET.error = resources.getString(R.string.colorError)
+                }
+                else {
+                    val car = Car(car.id, brandET.text.toString(), modelET.text.toString(), typeOfCar, cap, pow, year, typeOfEngine, colorET.text.toString())
+                    updateViewModel.updateCar(car)
+                    var sb: String = ""
+                    sb = resources.getString(R.string.update) + " ${car.brand} ${car.model}"
+                    Toast.makeText(this, sb , Toast.LENGTH_LONG).show()
+                }
+
             }
-            else
-                Toast.makeText(this, "Adding failed, try again.", Toast.LENGTH_LONG).show()
         }
 
 
@@ -159,7 +171,7 @@ class UpdateActivity : AppCompatActivity() {
         else if (position == 4)
             typeOfEngine = EngineType.HYBRID
         else
-            Toast.makeText(this, "Error engine type", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.engineError, Toast.LENGTH_LONG).show()
 
         return typeOfEngine
     }
@@ -181,7 +193,7 @@ class UpdateActivity : AppCompatActivity() {
         else if (position == 7)
             typeOfCar = CarType.COUPE
         else
-            Toast.makeText(this, "Error car type", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.carError, Toast.LENGTH_LONG).show()
     }
     private fun initUI() {
         brandET = findViewById(R.id.brandEditTextUp)

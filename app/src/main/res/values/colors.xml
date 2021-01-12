@@ -6,4 +6,16 @@
     <color name="white">#FFFFFF</color>
     <color name="gray">#c5cae9</color>
     <color name="lithGrey">#a5d6a7</color>
+    <color name="grey1">#e0e0e0</color>
+    <color name="grey2">#bdbdbd</color>
+
+
+    <color name="yellow">#ffeb3b</color>
+    <color name="lithGreen">#8bc34a</color>
+    <color name="orange">#fb8c00</color>
+    <color name="pink">#f48fb1</color>
+    <color name="blue">#1e88e5</color>
+    <color name="green">#1b5e20</color>
+    <color name="red">#d32f2f</color>
+    <color name="purple">#8e24aa</color>
 </resources>

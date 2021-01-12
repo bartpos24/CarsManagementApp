@@ -17,12 +17,14 @@
     <string name="e_enter_valid_mail">Please enter valid email</string>
     <string name="e_enter_password">Please enter a password</string>
     <string name="e_login_fail">Login failed! Check email and password!</string>
+    <string name="login_success">Successful login</string>
 
     //Register activity
     <string name="register_button">Register</string>
     <string name="e_password_requirements">Password must has minimum 6 characters</string>
     <string name="p_register_success">Registration successful</string>
     <string name="e_sign_up_fail">Sign Up failed. Try again.</string>
+
     <string name="sample_data">Sample data</string>
     <string name="name_editText">Name</string>
     <string name="e_enter_name">Please enter a name</string>
@@ -50,10 +52,18 @@
     <string name="yearEditText">Year</string>
     <string name="colorEditText">Color</string>
     <string name="addCarButton">Add Car</string>
-    <string name="doubleError">Please enter double data</string>
-    <string name="intError">Please enter Integer data</string>
-    <string name="yearError">Please enter Integer year</string>
+    <string name="doubleError">Capacity must be Double data</string>
+    <string name="intError">Power must be Integer data</string>
+    <string name="yearError">Year must be Integer data</string>
     <string name="error">Please enter invalid data</string>
+    <string name="brandError">Please enter a brand</string>
+    <string name="modelError">Please enter a model</string>
+    <string name="colorError">Please enter a color</string>
+    <string name="capacityError">Capacity must be greater than zero</string>
+    <string name="powerError">Power must be greater than zero</string>
+    <string name="yearError1">Year must be greater than zero</string>
+    <string name="carError">Please select car type</string>
+    <string name="engineError">Please select engine type</string>
 
     //Spinner strings
     <string-array name="engType">
@@ -85,8 +95,37 @@
     <string name="carType">Car type</string>
     <string name="engType">Engine type</string>
     <string name="updateBtn">Update Car</string>
+    <string name="update">Updated</string>
     <string name="deleteBtn">Delete Car</string>
     <string name="soldBtn">Sold Car</string>
 
+    //Statistics Fragment
+    <string name="carTypeTableMain">Number of cars sold and actualized by car type</string>
+    <string name="carTypeTable">Car Type</string>
+    <string name="actualCar">Actual Cars</string>
+    <string name="soldCar">Sold Cars</string>
+
+    <string name="engineTypeTableMain">Number of cars and actualized by engine type</string>
+    <string name="engineTypeTable">Engine Type</string>
+
+    <string name="hetchback">Hetchback</string>
+    <string name="sedan">Sedan</string>
+    <string name="combi">Combi</string>
+    <string name="suv">SUV</string>
+    <string name="cabriolet">Cabriolet</string>
+    <string name="van">VAN</string>
+    <string name="pickup">Pickup</string>
+    <string name="coupe">Coupe</string>
+
+    <string name="diesel">Diesel</string>
+    <string name="benzine">Benzine</string>
+    <string name="lpg">LPG</string>
+    <string name="electric">Electric</string>
+    <string name="hybrid">Hybrid</string>
+
+    <string name="powerTV">Number of cars depending on power</string>
+
+    //Prognosis fragment
+    <string name="compareBtn">Compare</string>
 
 </resources>

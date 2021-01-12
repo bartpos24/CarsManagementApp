@@ -36,12 +36,6 @@ class AddCar : Fragment() {
     private var typeOfEngine: EngineType = EngineType.NONE
     private var typeOfCar: CarType = CarType.NONE
 
-    private lateinit var modelTextView: TextView
-
-    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private var ref: DatabaseReference = database.getReference("Cars")
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,7 +52,6 @@ class AddCar : Fragment() {
         yearEditText = view!!.findViewById(R.id.yearEditText)
         colorEditText = view!!.findViewById(R.id.colorEditText)
 
-        modelTextView = view!!.findViewById(R.id.modelTextView)
 
         addCarViewModel = ViewModelProvider(this).get(AddCarViewModel::class.java)
 
@@ -123,21 +116,61 @@ class AddCar : Fragment() {
 
         addCarButton.setOnClickListener {
 
-            var cap = capSelectedView()
-            var pow = powerSelectedView()
-            var year = yearSelectedView()
-            if (cap != 0.0 && pow != 0 && year != 0 && typeOfEngine != EngineType.NONE && typeOfCar != CarType.NONE) {
-                val car = Car("", brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, cap, pow, year, typeOfEngine, colorEditText.text.toString())
+            var validation = validationCar()
+            if (validation == true) {
+                val car = Car("", brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, capEditText.text.toString().toDouble(), powerEditText.text.toString().toInt(), yearEditText.text.toString().toInt(), typeOfEngine, colorEditText.text.toString())
                 addCarViewModel.addCar(car)
                 Toast.makeText(mContext, "Add ${car.brand} ${car.model}", Toast.LENGTH_LONG).show()
+                clearUI()
             }
             else
                 Toast.makeText(mContext, "Adding failed, try again.", Toast.LENGTH_LONG).show()
 
-
         }
 
         return view
+    }
+    private fun validationCar() : Boolean{
+        var validation: Boolean = true
+        if (brandEditText.text.toString() == "") {
+            brandEditText.error = resources.getString(R.string.brandError)
+            validation = false
+        }
+        if (modelEditText.text.toString() == "") {
+            modelEditText.error = resources.getString(R.string.modelError)
+            validation = false
+        }
+        if (colorEditText.text.toString() == "") {
+            colorEditText.error = resources.getString(R.string.colorError)
+            validation = false
+        }
+        var cap = capSelectedView()
+        var pow = powerSelectedView()
+        var year = yearSelectedView()
+        if (cap == 0.0 || cap < 0.0) {
+            capEditText.error = resources.getString(R.string.capacityError)
+            validation = false
+        }
+        if (pow == 0 || pow < 0) {
+            powerEditText.error = resources.getString(R.string.powerError)
+            validation = false
+        }
+        if (year == 0 || year < 0) {
+            yearEditText.error = resources.getString(R.string.yearError1)
+            validation = false
+        }
+
+        if (typeOfEngine == EngineType.NONE) {
+            Toast.makeText(mContext, R.string.engineError, Toast.LENGTH_LONG).show()
+            validation = false
+        }
+        if (typeOfCar == CarType.NONE) {
+            Toast.makeText(mContext, R.string.carError, Toast.LENGTH_LONG).show()
+            validation = false
+        }
+
+        return validation
+
     }
 
 
@@ -150,6 +183,17 @@ class AddCar : Fragment() {
         super.onActivityCreated(savedInstanceState)
         addCarViewModel = ViewModelProvider(this).get(AddCarViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    private fun clearUI() {
+        brandEditText.text.clear()
+        modelEditText.text.clear()
+        capEditText.text.clear()
+        powerEditText.text.clear()
+        yearEditText.text.clear()
+        colorEditText.text.clear()
+        engTypeSpinner.setSelection(0)
+        carTypeSpinner.setSelection(0)
     }
 
     fun engSelectedView(position: Int): EngineType{
@@ -168,7 +212,7 @@ class AddCar : Fragment() {
 
         return typeOfEngine
     }
-    fun carSelectedView(position: Int) {
+    private fun carSelectedView(position: Int) {
         if (position == 0)
             typeOfCar = CarType.HETCHABCK
         else if (position == 1)
@@ -188,45 +232,45 @@ class AddCar : Fragment() {
         else
             Toast.makeText(mContext, "Error car type", Toast.LENGTH_LONG).show()
     }
-    fun capSelectedView(): Double {
+    private fun capSelectedView(): Double {
         var capacity: Double = 0.0
         try {
             capacity = capEditText.text.toString().toDouble()
         }
         catch (e: NumberFormatException) {
-            Toast.makeText(mContext, R.string.doubleError, Toast.LENGTH_LONG).show()
+            capEditText.error = resources.getString(R.string.doubleError)
         }
         catch (e: Throwable) {
-            Toast.makeText(mContext, R.string.error, Toast.LENGTH_LONG).show()
+            capEditText.error = resources.getString(R.string.error)
         }
 
         return capacity
 
     }
-    fun powerSelectedView(): Int {
+    private fun powerSelectedView(): Int {
         var power: Int = 0
         try {
             power = powerEditText.text.toString().toInt()
         }
         catch (e: NumberFormatException) {
-            Toast.makeText(mContext, R.string.intError, Toast.LENGTH_LONG).show()
+            powerEditText.error = resources.getString(R.string.intError)
         }
         catch (e: Throwable) {
-            Toast.makeText(mContext, R.string.error, Toast.LENGTH_LONG).show()
+            powerEditText.error = resources.getString(R.string.error)
         }
 
         return power
     }
-    fun yearSelectedView(): Int {
+    private fun yearSelectedView(): Int {
         var year: Int = 0
         try {
             year = yearEditText.text.toString().toInt()
         }
         catch (e: NumberFormatException) {
-            Toast.makeText(mContext, R.string.yearError, Toast.LENGTH_LONG).show()
+            yearEditText.error = resources.getString(R.string.yearError)
         }
         catch (e: Throwable) {
-            Toast.makeText(mContext, R.string.error, Toast.LENGTH_LONG).show()
+            yearEditText.error = resources.getString(R.string.error)
         }
 
         return year

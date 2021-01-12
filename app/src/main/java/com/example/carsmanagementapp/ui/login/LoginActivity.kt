@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.carsmanagementapp.MainActivity
 import com.example.carsmanagementapp.R
 import com.example.carsmanagementapp.ui.register.RegisterActivity
@@ -31,7 +33,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         initUI()
 
+
         auth = FirebaseAuth.getInstance()
+
 
         loginBtn.setOnClickListener { doLogin() }
         registerBtn.setOnClickListener {
@@ -84,6 +88,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     progressBar.visibility = View.GONE
                     val user = auth.currentUser
+                    Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show()
                     updateUI(user)
                 } else {
                     progressBar.visibility = View.GONE

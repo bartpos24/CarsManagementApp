@@ -5,143 +5,221 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.addCar.AddCar">
+    tools:context=".ui.cars.dateails.update.UpdateActivity">
 
+
+    <TextView
+        android:id="@+id/brandUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="@string/brand"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/brandEditText"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="125dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/brandEditText"
-        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/modelUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/model"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/brandUp" />
 
     <EditText
         android:id="@+id/modelEditText"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/modelEditText"
-
-        android:layout_marginLeft="125dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/modelEditText"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/brandEditText" />
+
+    <TextView
+        android:id="@+id/capacityUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/capacity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modelUp" />
 
     <EditText
         android:id="@+id/capEditText"
-        android:layout_width="75dp"
+        android:layout_width="80dp"
         android:layout_height="40dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:gravity="center"
         android:hint="@string/capEditText"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:inputType="textPersonName"
+        android:layout_marginLeft="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modelEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/capacityUp" />
+
     <TextView
         android:id="@+id/capTextView"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:gravity="center"
         android:text="dm3"
         android:textSize="15dp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
         app:layout_constraintStart_toEndOf="@+id/capEditText"
+        app:layout_constraintTop_toBottomOf="@+id/capacityUp" />
+
+    <TextView
+        android:id="@+id/powerUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/power"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/modelEditText" />
 
     <EditText
         android:id="@+id/powerEditText"
-        android:layout_width="75dp"
+        android:layout_width="80dp"
         android:layout_height="40dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:gravity="center"
         android:hint="@string/powerEditText"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintStart_toEndOf="@+id/capTextView"
-        app:layout_constraintTop_toBottomOf="@+id/modelEditText" />
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/powerTextView"
+        app:layout_constraintTop_toBottomOf="@+id/powerUp" />
 
     <TextView
         android:id="@+id/powerTextView"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center"
         android:text="KM"
         android:textSize="20dp"
-        tools:layout_editor_absoluteX="239dp"
-        tools:layout_editor_absoluteY="255dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toEndOf="@+id/powerEditText"
-        app:layout_constraintTop_toBottomOf="@+id/modelEditText"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/powerUp" />
 
-    <EditText
-        android:id="@+id/yearEditText"
-        android:layout_width="75dp"
+
+    <TextView
+        android:id="@+id/yearUp"
+        android:layout_width="120dp"
         android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/yearEditText"
+        android:gravity="center"
+        android:text="@string/year"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/capEditText" />
 
     <EditText
+        android:id="@+id/yearEditText"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/yearEditText"
+        android:inputType="textPersonName"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/powerEditText" />
+
+    <TextView
+        android:id="@+id/colorUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/color"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yearUp" />
+
+    <EditText
         android:id="@+id/colorEditText"
-        android:layout_width="75dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:gravity="center"
         android:hint="@string/colorEditText"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintStart_toEndOf="@+id/yearEditText"
-        app:layout_constraintTop_toBottomOf="@+id/powerEditText" />
+        android:inputType="textPersonName"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yearEditText" />
+
+    <TextView
+        android:id="@+id/engineTypeUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/engType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colorUp" />
 
     <Spinner
         android:id="@+id/engTypeSpinner"
         android:layout_width="120dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_marginLeft="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/engineTypeUp" />
+
+    <TextView
+        android:id="@+id/carTypeUp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/engType"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colorEditText" />
 
     <Spinner
         android:id="@+id/carTypeSpinner"
         android:layout_width="120dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/engTypeSpinner" />
+        android:gravity="center"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carTypeUp" />
 
     <Button
         android:id="@+id/addCarButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
         android:text="@string/addCarButton"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carTypeSpinner" />
-    <TextView
-        android:id="@+id/modelTextView"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:text="KM"
-        android:textSize="20dp"
-        tools:layout_editor_absoluteX="239dp"
-        tools:layout_editor_absoluteY="255dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
-        app:layout_constraintStart_toEndOf="@+id/colorEditText"
-        app:layout_constraintTop_toBottomOf="@+id/powerTextView"/>
+        app:layout_constraintTop_toBottomOf="@+id/engTypeSpinner" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
