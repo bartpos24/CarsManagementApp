@@ -1,121 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.register.RegisterActivity">
-
-
-    <EditText
-        android:id="@+id/name_register_editText"
+    >
+    <data>
+        <variable name="viewmodel"
+            type="com.example.carsmanagementapp.ui.login.AuthViewModel"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:drawableLeft="@drawable/ic_draft"
-        android:gravity="center"
-        android:hint="@string/name_editText"
-        android:inputType="textEmailAddress"
-        android:layout_marginTop="100dp"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/surname_register_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name_register_editText"
-        android:ems="10"
-        android:drawableLeft="@drawable/ic_draft"
-        android:gravity="center"
-        android:hint="@string/surname_editText"
-        android:inputType="text"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_register_editText" />
-
-    <EditText
-        android:id="@+id/email_register_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/surname_register_editText"
-        android:ems="10"
-        android:hint="@string/email_editText"
-        android:drawableLeft="@drawable/ic_email"
-        android:gravity="center"
-        android:inputType="textEmailAddress"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surname_register_editText" />
-
-    <EditText
-        android:id="@+id/password_register_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/email_register_editText"
-        android:ems="10"
-        android:hint="@string/password_editText"
-        android:drawableLeft="@drawable/ic_lock"
-        android:gravity="center"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_register_editText" />
-
-    <EditText
-        android:id="@+id/passwordRepeat_register_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/password_register_editText"
-        android:ems="10"
-        android:hint="@string/passwordRepeat"
-        android:drawableLeft="@drawable/ic_lock"
-        android:gravity="center"
-        android:inputType="textPassword"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_register_editText" />
-
-    <Button
-        android:id="@+id/register_button"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/passwordRepeat_register_editText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:background="@color/colorPrimary"
-        android:padding="10dp"
-        android:text="@string/register_button"
-        android:textSize="12dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordRepeat_register_editText"
-        tools:text="@string/register_button" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        tools:context=".ui.register.RegisterActivity">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/name_register_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:drawableLeft="@drawable/ic_draft"
+            android:gravity="center"
+            android:hint="@string/name_editText"
+            android:text="@={viewmodel.name}"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="100dp"
+            android:layout_marginHorizontal="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/surname_register_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_register_editText"
+            android:ems="10"
+            android:drawableLeft="@drawable/ic_draft"
+            android:gravity="center"
+            android:hint="@string/surname_editText"
+            android:text="@={viewmodel.surname}"
+            android:inputType="text"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_register_editText" />
+
+        <EditText
+            android:id="@+id/email_register_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/surname_register_editText"
+            android:ems="10"
+            android:hint="@string/email_editText"
+            android:text="@={viewmodel.email}"
+            android:drawableLeft="@drawable/ic_email"
+            android:gravity="center"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/surname_register_editText" />
+
+        <EditText
+            android:id="@+id/password_register_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/email_register_editText"
+            android:ems="10"
+            android:hint="@string/password_editText"
+            android:text="@={viewmodel.password}"
+            android:drawableLeft="@drawable/ic_lock"
+            android:gravity="center"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_register_editText" />
+
+        <EditText
+            android:id="@+id/passwordRepeat_register_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/password_register_editText"
+            android:ems="10"
+            android:hint="@string/passwordRepeat"
+            android:text="@={viewmodel.repeatPassword}"
+            android:drawableLeft="@drawable/ic_lock"
+            android:gravity="center"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_register_editText" />
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/passwordRepeat_register_editText"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimary"
+            android:padding="10dp"
+            android:text="@string/register_button"
+            android:onClick="@{() -> viewmodel.register()}"
+            android:textSize="12dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordRepeat_register_editText"
+            tools:text="@string/register_button" />
+
+        <TextView
+            android:id="@+id/text_view_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:layout_gravity="center_horizontal"
+            android:onClick="@{(v) -> viewmodel.goToLogin(v)}"
+            android:text="@string/goToLogin"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_button" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

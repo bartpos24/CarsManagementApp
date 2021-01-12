@@ -37,6 +37,7 @@
 
     <string name="menu_home">Home</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="goToLogin">Masz już konto. Zaloguj sie tutaj</string>
 
     //fragment strings
 
