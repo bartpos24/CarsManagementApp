@@ -1,6 +1,8 @@
 package com.example.carsmanagementapp.ui.prognosis
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +29,7 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
     private lateinit var mContext: Context
     var cars: ArrayList<Car> = ArrayList()
 
-    var list: ArrayList<Car> = ArrayList()
+    var listToPrognosis: ArrayList<Car> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,11 +55,14 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
             }
         })
         compareBtn.setOnClickListener {
-            if (list.size == 2) {
+            if (listToPrognosis.size == 2) {
+                var betterCar = prognosisViewModel.prognosisValidation(listToPrognosis[0], listToPrognosis[1])
 
+                var otherPrognosis = prognosisViewModel.otherPrognosis(listToPrognosis[0], listToPrognosis[1])
+                showBetterDialog(betterCar)
             }
             else {
-                Toast.makeText(mContext, "Please select two cars to compare", Toast.LENGTH_LONG).show()
+                Toast.makeText(mContext, R.string.compareEror, Toast.LENGTH_LONG).show()
             }
         }
 
@@ -73,29 +79,29 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
     }
 
     private fun carToCompare(item: Car) {
-        if (list.size < 2) {
+        if (listToPrognosis.size < 2) {
 
-            if (list.size == 1 && list[0] == item) {
-                list.remove(list[0])
-                Toast.makeText(mContext, list.toString(), Toast.LENGTH_LONG).show()
+            if (listToPrognosis.size == 1 && listToPrognosis[0] == item) {
+                listToPrognosis.remove(listToPrognosis[0])
+                Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
             else {
-                list.add(item)
-                Toast.makeText(mContext, list.toString(), Toast.LENGTH_LONG).show()
+                listToPrognosis.add(item)
+                Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
 
         }
         else {
-            if (list[0] == item) {
-                list.remove(list[0])
-                Toast.makeText(mContext, list.toString(), Toast.LENGTH_LONG).show()
+            if (listToPrognosis[0] == item) {
+                listToPrognosis.remove(listToPrognosis[0])
+                Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
-            else if (list[1] == item) {
-                list.remove(list[1])
-                Toast.makeText(mContext, list.toString(), Toast.LENGTH_LONG).show()
+            else if (listToPrognosis[1] == item) {
+                listToPrognosis.remove(listToPrognosis[1])
+                Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
             else
-                Toast.makeText(mContext, "Selected two cars. Uncheck one of them and check other or compare them.", Toast.LENGTH_LONG).show()
+                Toast.makeText(mContext, R.string.chooseCars, Toast.LENGTH_LONG).show()
         }
     }
     /*holder.itemView.setOnClickListener {
@@ -108,6 +114,42 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    private fun showBetterDialog(car: Car) {
+        val builder = AlertDialog.Builder(mContext)
+        builder.setTitle(R.string.prognosisResult)
+
+        val inflater = LayoutInflater.from(mContext)
+        val view = inflater.inflate(R.layout.better_car_layout, null)
+
+        val brandTV = view.findViewById<TextView>(R.id.brandTV)
+        val modelTV = view.findViewById<TextView>(R.id.modelTV)
+        val engTypeTV = view.findViewById<TextView>(R.id.engineTypeTV)
+        val carTypeTV = view.findViewById<TextView>(R.id.carTypeTV)
+        val colorTV = view.findViewById<TextView>(R.id.colorTV)
+        val capacityTV = view.findViewById<TextView>(R.id.capacityTV)
+        val powerTV = view.findViewById<TextView>(R.id.powerTV)
+        val yearTV = view.findViewById<TextView>(R.id.yearTV)
+
+        brandTV.text = car.brand
+        modelTV.text = car.model
+        colorTV.text = car.color
+        powerTV.text = car.power.toString()
+        capacityTV.text = car.engCap.toString()
+        engTypeTV.text = car.engType.toString()
+        yearTV.text = car.year.toString()
+        carTypeTV.text = car.carType.toString()
+
+        builder.setView(view)
+        val alert = builder.create()
+
+        builder.setPositiveButton("X", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                alert.cancel()
+            }
+        })
+        alert.show()
     }
 
 }

@@ -66,7 +66,7 @@ class DetailsActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             else
-                Toast.makeText(this, "Car was solded or deleted", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.updateError, Toast.LENGTH_LONG).show()
 
         }
         soldBtn.setOnClickListener {
@@ -81,7 +81,7 @@ class DetailsActivity : AppCompatActivity() {
                 clearET()
             }
             else {
-                Toast.makeText(this, "Car was solded or deleted", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.updateError, Toast.LENGTH_LONG).show()
             }
 
         }
@@ -97,7 +97,7 @@ class DetailsActivity : AppCompatActivity() {
                 clearET()
             }
             else {
-                Toast.makeText(this, "Car was solded or deleted", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.updateError, Toast.LENGTH_LONG).show()
             }
         }
     }

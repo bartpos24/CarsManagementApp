@@ -10,33 +10,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
-import com.example.carsmanagementapp.MainActivity
 import com.example.carsmanagementapp.Model.User
 import com.example.carsmanagementapp.R
-import com.example.carsmanagementapp.databinding.ActivityRegisterBinding
-import com.example.carsmanagementapp.ui.login.AuthListener
-import com.example.carsmanagementapp.ui.login.AuthViewModel
-import com.example.carsmanagementapp.ui.login.AuthViewModelFactory
 import com.example.carsmanagementapp.ui.login.LoginActivity
-import com.example.carsmanagementapp.utils.startMainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.generic.instance
 
-class RegisterActivity : AppCompatActivity(), AuthListener, KodeinAware {
-
-    override val kodein by kodein()
-    private val factory : AuthViewModelFactory by instance()
-
-    private lateinit var viewModel: AuthViewModel
-
-    /*private lateinit var auth: FirebaseAuth
+class RegisterActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     private lateinit var registerButton: Button
     private lateinit var nameEditText: EditText
     private lateinit var surnameEditText: EditText
@@ -46,43 +29,19 @@ class RegisterActivity : AppCompatActivity(), AuthListener, KodeinAware {
     private lateinit var database: FirebaseDatabase
     private lateinit var ref: DatabaseReference
     private lateinit var progressBar: ProgressBar
-*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val binding: ActivityRegisterBinding = DataBindingUtil.setContentView(this, R.layout.activity_register)
-        viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel::class.java)
-        binding.viewmodel = viewModel
-
-        viewModel.authListener = this
-/*
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         ref = database.getReference("Users")
         initUI()
-        registerButton.setOnClickListener { registerUser() }*/
+        registerButton.setOnClickListener { registerUser() }
     }
 
-    override fun onStarted() {
-        //progressbar.visibility = View.VISIBLE
-        Intent(this, MainActivity::class.java).also {
-            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(it)
-        }
-    }
-
-    override fun onSuccess() {
-        //progressbar.visibility = View.GONE
-        startMainActivity()
-    }
-
-    override fun onFailure(message: String) {
-        //progressbar.visibility = View.GONE
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    /*private fun initUI() {
+    private fun initUI() {
         registerButton = findViewById(R.id.register_button)
         emailEditText = findViewById(R.id.email_register_editText)
         passwordEditText = findViewById(R.id.password_register_editText)
@@ -91,9 +50,9 @@ class RegisterActivity : AppCompatActivity(), AuthListener, KodeinAware {
         repeatPasswordEditText = findViewById(R.id.passwordRepeat_register_editText)
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.GONE
-    }*/
+    }
 
-    /*private fun registerUser() {
+    private fun registerUser() {
         if (nameEditText.text.toString().isEmpty()) {
             nameEditText.error = resources.getString(R.string.e_enter_name)
             nameEditText.requestFocus()
@@ -165,13 +124,11 @@ class RegisterActivity : AppCompatActivity(), AuthListener, KodeinAware {
                     }
                 }
                 catch (existsEmail: FirebaseAuthUserCollisionException) {
-                    Log.d("TAG", "onComplete: ExistsEmail");
                     Toast.makeText(baseContext, resources.getString(R.string.e_email_exists), Toast.LENGTH_LONG).show()
                 }
                 catch (e: Throwable) {
-                    Log.d("TAG", "onComplete: " + e.message)
                     Toast.makeText(baseContext, e.message.toString(), Toast.LENGTH_LONG).show()
                 }
             }
-    }*/
+    }
 }

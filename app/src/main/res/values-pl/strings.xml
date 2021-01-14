@@ -37,7 +37,6 @@
 
     <string name="menu_home">Home</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="goToLogin">Masz już konto. Zaloguj sie tutaj</string>
 
     //fragment strings
 
@@ -67,6 +66,10 @@
     <string name="yearError1">Rok produkcji musi być większy od zera</string>
     <string name="carError">Proszę wybrać typ samochodu</string>
     <string name="engineError">Proszę wybrać typ silnika</string>
+    <string name="addingFailed">Dodawanie nie powiodło się, spróbuj ponownie</string>
+    <string name="engineTypeError">Niepoprawny typ silnika</string>
+    <string name="carTypeError">Niepoprawny typ samochodu</string>
+    <string name="add">Dodano</string>
 
 
 
@@ -104,6 +107,9 @@
     <string name="update">Zaktualizowano</string>
     <string name="deleteBtn">Usuń</string>
     <string name="soldBtn">Sprzedaj</string>
+    <string name="updateError">Samochód został sprzedany lub usunięty</string>
+    <string name="soldingSuccesful">Sprzedaż zakończona pomyślnie</string>
+    <string name="deletingSuccesful">Usuwanie zakończone pomyślnie</string>
 
 
     //Statistics Fragment
@@ -133,5 +139,8 @@
 
     //Prognosis fragment
     <string name="compareBtn">Porównaj</string>
+    <string name="compareEror">Proszę wybrać dwa samochody do porównania</string>
+    <string name="chooseCars">Wybierz dwa samochody. Odznacz jeden i wybierz inny</string>
+    <string name="prognosisResult">Lepszy samochód to:</string>
 
 </resources>

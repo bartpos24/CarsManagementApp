@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.carsmanagementapp.Model.Car
+import com.example.carsmanagementapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -48,7 +49,7 @@ class DetailsViewModel: ViewModel() {
         ref = database.getReference("Cars").child(auth.currentUser!!.uid).child("ActualCars")
         ref.child(car.id).setValue(null).addOnCompleteListener {
             if (it.isSuccessful) {
-                _result.value = "Solding succesful"
+                _result.value = R.string.soldingSuccesful.toString()
             }
             else {
                 _result.value = it.exception.toString()
@@ -61,7 +62,7 @@ class DetailsViewModel: ViewModel() {
         ref = database.getReference("Cars").child(auth.currentUser!!.uid).child("ActualCars")
         ref.child(car.id).setValue(null).addOnCompleteListener {
             if (it.isSuccessful) {
-                _result.value = "Deleting succesful"
+                _result.value = R.string.deletingSuccesful.toString()
             }
             else {
                 _result.value = it.exception.toString()

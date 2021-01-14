@@ -37,8 +37,6 @@
     <string name="menu_home">Home</string>
     <string name="title_activity_login">LoginActivity</string>
 
-    <string name="goToLogin">Already have an account. Login Here</string>
-
     //fragment strings
 
     <string name="nav_statistic">Statistics</string>
@@ -66,6 +64,10 @@
     <string name="yearError1">Year must be greater than zero</string>
     <string name="carError">Please select car type</string>
     <string name="engineError">Please select engine type</string>
+    <string name="add">Added</string>
+    <string name="addingFailed">Adding failed, try again</string>
+    <string name="engineTypeError">Error engine type</string>
+    <string name="carTypeError">Error car type</string>
 
     //Spinner strings
     <string-array name="engType">
@@ -100,6 +102,9 @@
     <string name="update">Updated</string>
     <string name="deleteBtn">Delete Car</string>
     <string name="soldBtn">Sold Car</string>
+    <string name="updateError">Car was solded or deleted</string>
+    <string name="soldingSuccesful">Solding succesful</string>
+    <string name="deletingSuccesful">Deleting succesful</string>
 
     //Statistics Fragment
     <string name="carTypeTableMain">Number of cars sold and actualized by car type</string>
@@ -129,5 +134,8 @@
 
     //Prognosis fragment
     <string name="compareBtn">Compare</string>
+    <string name="compareEror">Please select two cars to compare</string>
+    <string name="chooseCars">Selected two cars. Uncheck one of them and check other or compare them.</string>
+    <string name="prognosisResult">Better car is:</string>
 
 </resources>

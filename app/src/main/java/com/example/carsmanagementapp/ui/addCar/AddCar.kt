@@ -17,6 +17,7 @@ import com.example.carsmanagementapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.lang.NumberFormatException
+import java.lang.StringBuilder
 
 
 class AddCar : Fragment() {
@@ -120,11 +121,15 @@ class AddCar : Fragment() {
             if (validation == true) {
                 val car = Car("", brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, capEditText.text.toString().toDouble(), powerEditText.text.toString().toInt(), yearEditText.text.toString().toInt(), typeOfEngine, colorEditText.text.toString())
                 addCarViewModel.addCar(car)
-                Toast.makeText(mContext, "Add ${car.brand} ${car.model}", Toast.LENGTH_LONG).show()
+                var sb = StringBuilder()
+                sb.append(R.string.add).append(" ").append(car.brand).append(" ").append(car.model)
+                Toast.makeText(mContext, sb, Toast.LENGTH_LONG).show()
                 clearUI()
             }
-            else
-                Toast.makeText(mContext, "Adding failed, try again.", Toast.LENGTH_LONG).show()
+            else {
+
+            }
+                Toast.makeText(mContext, R.string.addingFailed, Toast.LENGTH_LONG).show()
 
         }
 
@@ -208,7 +213,7 @@ class AddCar : Fragment() {
         else if (position == 4)
             typeOfEngine = EngineType.HYBRID
         else
-            Toast.makeText(mContext, "Error engine type", Toast.LENGTH_LONG).show()
+            Toast.makeText(mContext, R.string.engineTypeError, Toast.LENGTH_LONG).show()
 
         return typeOfEngine
     }
@@ -230,7 +235,7 @@ class AddCar : Fragment() {
         else if (position == 7)
             typeOfCar = CarType.COUPE
         else
-            Toast.makeText(mContext, "Error car type", Toast.LENGTH_LONG).show()
+            Toast.makeText(mContext, R.string.carTypeError, Toast.LENGTH_LONG).show()
     }
     private fun capSelectedView(): Double {
         var capacity: Double = 0.0

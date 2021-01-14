@@ -41,16 +41,12 @@ class CarsFragment : Fragment() {
         carsViewModel.actualListOfCar.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 cars = it
-                Log.i("Cars", it.size.toString())
                 carsAdapter = CarsAdapter(cars)
                 recyclerView.adapter = carsAdapter
 
             }
 
         })
-
-        Log.e("","")
-
 
         return view
     }
