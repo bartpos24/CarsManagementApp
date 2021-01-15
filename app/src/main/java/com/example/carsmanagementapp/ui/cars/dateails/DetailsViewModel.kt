@@ -6,13 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.carsmanagementapp.Model.Car
 import com.example.carsmanagementapp.R
+import com.example.carsmanagementapp.repositories.DatabaseRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class DetailsViewModel: ViewModel() {
+class DetailsViewModel(private val repository: DatabaseRepository): ViewModel() {
 
     private var auth = FirebaseAuth.getInstance()
     private var database = FirebaseDatabase.getInstance()
@@ -25,27 +26,14 @@ class DetailsViewModel: ViewModel() {
 
     var carDetails: MutableLiveData<Car> = MutableLiveData()
 
-
-    fun loadCar(id: String){
-        ref = database.getReference("Cars").child(auth.currentUser!!.uid).child("ActualCars")
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (h in snapshot.children) {
-                        val car = h.getValue(Car::class.java)
-                        if (id == car!!.id) {
-                            carDetails.value = car
-                        }
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
+    fun loadCar(id: String): LiveData<Car> {
+        return repository.getCar(id)
     }
     fun soldCar(car: Car) {
+        repository.soldCar(car)
+    }
+
+    /*fun soldCar(car: Car) {
         ref = database.getReference("Cars").child(auth.currentUser!!.uid).child("ActualCars")
         ref.child(car.id).setValue(null).addOnCompleteListener {
             if (it.isSuccessful) {
@@ -57,8 +45,11 @@ class DetailsViewModel: ViewModel() {
         }
         ref = database.getReference("Cars").child(auth.currentUser!!.uid).child("SoldCars")
         ref.child(car.id).setValue(car)
-    }
+    }*/
     fun deleteCar(car: Car) {
+        repository.deleteCar(car)
+    }
+    /*fun deleteCar(car: Car) {
         ref = database.getReference("Cars").child(auth.currentUser!!.uid).child("ActualCars")
         ref.child(car.id).setValue(null).addOnCompleteListener {
             if (it.isSuccessful) {
@@ -68,6 +59,6 @@ class DetailsViewModel: ViewModel() {
                 _result.value = it.exception.toString()
             }
         }
-    }
+    }*/
 
 }

@@ -13,14 +13,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carsmanagementapp.Model.Car
 import com.example.carsmanagementapp.R
+import com.example.carsmanagementapp.repositories.DatabaseRepository
 import com.example.carsmanagementapp.ui.cars.CarsAdapter
 
 class PrognosisFragment : Fragment(), OnCarClickListner {
 
+    private lateinit var prognosisViewModelFactory: PrognosisViewModelFactory
     private lateinit var prognosisViewModel: PrognosisViewModel
     private lateinit var recyclerView: RecyclerView
     lateinit var prognosisAdapter: PrognosisAdapter
@@ -42,18 +46,26 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
 
         recyclerView.layoutManager = prognosisMenager
 
-        prognosisViewModel = ViewModelProvider(this).get(PrognosisViewModel::class.java)
+        val repository = DatabaseRepository()
+        prognosisViewModelFactory = PrognosisViewModelFactory(repository)
+        prognosisViewModel = ViewModelProviders.of(this, prognosisViewModelFactory).get(PrognosisViewModel::class.java)
 
-        prognosisViewModel.loadDatabase()
+        prognosisViewModel.loadDatabase().observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                cars = it
+                prognosisAdapter = PrognosisAdapter(cars, this)
+                recyclerView.adapter = prognosisAdapter
+            }
+        })
 
-        prognosisViewModel.actualCarList.observe(viewLifecycleOwner, {
+        /*prognosisViewModel.actualCarList.observe(viewLifecycleOwner, {
             if (it != null) {
                 cars = it
                 Log.i("Cars", it.size.toString())
                 prognosisAdapter = PrognosisAdapter(cars, this)
                 recyclerView.adapter = prognosisAdapter
             }
-        })
+        })*/
         compareBtn.setOnClickListener {
             if (listToPrognosis.size == 2) {
                 var betterCar = prognosisViewModel.prognosisValidation(listToPrognosis[0], listToPrognosis[1])

@@ -8,17 +8,19 @@ import android.widget.*
 import androidx.core.view.get
 import androidx.core.view.iterator
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.carsmanagementapp.Model.Car
 import com.example.carsmanagementapp.Model.Enum.CarType
 import com.example.carsmanagementapp.Model.Enum.EngineType
 import com.example.carsmanagementapp.R
+import com.example.carsmanagementapp.repositories.DatabaseRepository
 import com.example.carsmanagementapp.ui.cars.dateails.DetailsViewModel
 import java.lang.NumberFormatException
 
 class UpdateActivity : AppCompatActivity() {
 
+    private lateinit var updateViewModelFactory: UpdateViewModelFactory
     private lateinit var updateBtn: Button
-
     private lateinit var brandET: EditText
     private lateinit var modelET: EditText
     private lateinit var yearET: EditText
@@ -35,7 +37,9 @@ class UpdateActivity : AppCompatActivity() {
         var car = intent.getSerializableExtra("carToUpdate") as Car
 
         updateBtn = findViewById(R.id.updateBtnUp)
-        val updateViewModel = ViewModelProvider(this).get(UpdateViewModel::class.java)
+        val repository = DatabaseRepository()
+        updateViewModelFactory = UpdateViewModelFactory(repository)
+        val updateViewModel = ViewModelProviders.of(this, updateViewModelFactory).get(UpdateViewModel::class.java)
 
         initUI()
 

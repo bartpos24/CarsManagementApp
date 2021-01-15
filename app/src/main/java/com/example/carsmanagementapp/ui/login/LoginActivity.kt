@@ -11,14 +11,18 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.carsmanagementapp.MainActivity
 import com.example.carsmanagementapp.R
+import com.example.carsmanagementapp.repositories.AuthenticationRepository
 import com.example.carsmanagementapp.ui.register.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : AppCompatActivity() {
 
+    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var loginViewModelFactory: LoginViewModelFactory
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var loginBtn: Button
@@ -33,6 +37,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         initUI()
 
+        val repository = AuthenticationRepository()
+        loginViewModelFactory = LoginViewModelFactory(repository)
+        loginViewModel = ViewModelProviders.of(this, loginViewModelFactory).get(LoginViewModel::class.java)
 
         auth = FirebaseAuth.getInstance()
 
@@ -44,7 +51,8 @@ class LoginActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        val currentUser = auth.currentUser
+        val currentUser = loginViewModel.getCurrentUser()
+
         updateUI(currentUser)
     }
 
@@ -83,7 +91,19 @@ class LoginActivity : AppCompatActivity() {
         }
 
         progressBar.visibility = View.VISIBLE
-        auth.signInWithEmailAndPassword(emailEditText.text.toString(), passwordEditText.text.toString())
+
+        loginViewModel.getLogin(emailEditText.text.toString(), passwordEditText.text.toString()).observe(this, Observer {
+            if (it != null) {
+                val user = it
+                progressBar.visibility = View.GONE
+                updateUI(user)
+
+            }
+        })
+        /*val user = loginViewModel.getCurrentUser()
+        updateUI(user)*/
+        progressBar.visibility = View.GONE
+        /*auth.signInWithEmailAndPassword(emailEditText.text.toString(), passwordEditText.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     progressBar.visibility = View.GONE
@@ -95,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, resources.getString(R.string.e_login_fail), Toast.LENGTH_LONG).show()
                     updateUI(null)
                 }
-            }
+            }*/
     }
 
 

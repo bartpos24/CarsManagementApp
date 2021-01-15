@@ -12,7 +12,10 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import com.example.carsmanagementapp.Model.Car
 import com.example.carsmanagementapp.R
+import com.example.carsmanagementapp.repositories.DatabaseRepository
 import com.example.carsmanagementapp.ui.cars.CarsViewModel
 import com.example.carsmanagementapp.ui.cars.dateails.update.UpdateActivity
 import com.google.firebase.database.FirebaseDatabase
@@ -32,8 +35,9 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var updateBtn: Button
     private lateinit var deleteBtn: Button
     private lateinit var soldBtn: Button
+    private lateinit var car: Car
 
-    //private lateinit var detailsViewModel: ViewModel
+    private lateinit var detailsViewModelFactory: DetailsViewModelFactory
 
 
 
@@ -42,12 +46,14 @@ class DetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_details)
         initUI()
 
-        val detailsViewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
+        val repository = DatabaseRepository()
+        detailsViewModelFactory = DetailsViewModelFactory(repository)
+        val detailsViewModel = ViewModelProviders.of(this, detailsViewModelFactory).get(DetailsViewModel::class.java)
         var id = intent.getStringExtra("id")
 
-        detailsViewModel.loadCar(id!!)
 
-        detailsViewModel.carDetails.observe(this, {
+        detailsViewModel.loadCar(id!!).observe(this, {
+            car = it
             brandTV.text = it.brand
             modelTV.text = it.model
             colorTV.text = it.color
@@ -60,7 +66,6 @@ class DetailsActivity : AppCompatActivity() {
 
         updateBtn.setOnClickListener {
             if (modelTV.text != "") {
-                var car = detailsViewModel.carDetails.value
                 val intent = Intent(this, UpdateActivity::class.java)
                 intent.putExtra("carToUpdate", car)
                 startActivity(intent)
@@ -71,7 +76,6 @@ class DetailsActivity : AppCompatActivity() {
         }
         soldBtn.setOnClickListener {
             if (modelTV.text != "") {
-                var car = detailsViewModel.carDetails.value
                 detailsViewModel.soldCar(car!!)
 
                 detailsViewModel.result.observe(this, Observer {
@@ -87,7 +91,6 @@ class DetailsActivity : AppCompatActivity() {
         }
         deleteBtn.setOnClickListener {
             if (modelTV.text != "") {
-                var car = detailsViewModel.carDetails.value
                 detailsViewModel.deleteCar(car!!)
 
                 detailsViewModel.result.observe(this, Observer {

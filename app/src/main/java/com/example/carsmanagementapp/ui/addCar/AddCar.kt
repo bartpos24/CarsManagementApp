@@ -10,10 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.carsmanagementapp.Model.Car
 import com.example.carsmanagementapp.Model.Enum.CarType
 import com.example.carsmanagementapp.Model.Enum.EngineType
 import com.example.carsmanagementapp.R
+import com.example.carsmanagementapp.repositories.DatabaseRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.lang.NumberFormatException
@@ -23,6 +25,7 @@ import java.lang.StringBuilder
 class AddCar : Fragment() {
 
 
+    private lateinit var addCarViewModelFactory: AddViewModelFactory
     private lateinit var addCarViewModel: AddCarViewModel
     private lateinit var engTypeSpinner: Spinner
     private lateinit var carTypeSpinner: Spinner
@@ -53,8 +56,10 @@ class AddCar : Fragment() {
         yearEditText = view!!.findViewById(R.id.yearEditText)
         colorEditText = view!!.findViewById(R.id.colorEditText)
 
+        val repository = DatabaseRepository()
+        addCarViewModelFactory = AddViewModelFactory(repository)
 
-        addCarViewModel = ViewModelProvider(this).get(AddCarViewModel::class.java)
+        addCarViewModel = ViewModelProviders.of(this, addCarViewModelFactory).get(AddCarViewModel::class.java)
 
         var engAdapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(mContext, R.array.engType, android.R.layout.simple_spinner_item)
         engAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -116,7 +121,10 @@ class AddCar : Fragment() {
         }
 
         addCarButton.setOnClickListener {
-
+            val car = Car("", brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, capEditText.text.toString().toDouble(), powerEditText.text.toString().toInt(), yearEditText.text.toString().toInt(), typeOfEngine, colorEditText.text.toString())
+            addCarViewModel.addCar(car)
+            clearUI()
+/*
             var validation = validationCar()
             if (validation == true) {
                 val car = Car("", brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, capEditText.text.toString().toDouble(), powerEditText.text.toString().toInt(), yearEditText.text.toString().toInt(), typeOfEngine, colorEditText.text.toString())
@@ -129,7 +137,7 @@ class AddCar : Fragment() {
             else {
 
             }
-                Toast.makeText(mContext, R.string.addingFailed, Toast.LENGTH_LONG).show()
+                Toast.makeText(mContext, R.string.addingFailed, Toast.LENGTH_LONG).show()*/
 
         }
 

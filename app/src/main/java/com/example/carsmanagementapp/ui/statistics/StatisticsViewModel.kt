@@ -1,16 +1,18 @@
 package com.example.carsmanagementapp.ui.statistics
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.carsmanagementapp.Model.Car
 import com.example.carsmanagementapp.Model.Enum.CarType
 import com.example.carsmanagementapp.Model.Enum.EngineType
+import com.example.carsmanagementapp.repositories.DatabaseRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class StatisticsViewModel : ViewModel() {
-    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+class StatisticsViewModel(private val repository: DatabaseRepository) : ViewModel() {
+    /*private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
 
     private var ref: DatabaseReference = database.getReference("Cars").child(auth.currentUser!!.uid).child("ActualCars")
@@ -19,11 +21,17 @@ class StatisticsViewModel : ViewModel() {
 
     var actualCars: MutableLiveData<ArrayList<Car>> = MutableLiveData()
     var soldCars: MutableLiveData<ArrayList<Car>> = MutableLiveData()
+*/
 
 
+    fun getDatabase(): LiveData<ArrayList<Car>> {
+        return repository.getDatabase()
+    }
+    fun getSoldDatabase(): LiveData<java.util.ArrayList<Car>> {
+        return repository.getSoldDatabase()
+    }
 
-
-    fun loadDatabase() {
+    /*fun loadDatabase() {
         ref = database.getReference("Cars").child(auth.currentUser!!.uid).child("ActualCars")
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -58,7 +66,7 @@ class StatisticsViewModel : ViewModel() {
 
             }
         })
-    }
+    }*/
 
     fun loadPower(cars: ArrayList<Car>): ArrayList<Int> {
         var powerList: ArrayList<Int> = ArrayList<Int>()

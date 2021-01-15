@@ -10,8 +10,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import com.example.carsmanagementapp.Model.User
 import com.example.carsmanagementapp.R
+import com.example.carsmanagementapp.repositories.AuthenticationRepository
 import com.example.carsmanagementapp.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -19,6 +21,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
+
+    private lateinit var registerViewModel: RegisterViewModel
+    private lateinit var registerViewModelFactory: RegisterViewModelFactory
     private lateinit var auth: FirebaseAuth
     private lateinit var registerButton: Button
     private lateinit var nameEditText: EditText
@@ -33,6 +38,10 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        val repository = AuthenticationRepository()
+        registerViewModelFactory = RegisterViewModelFactory(repository)
+        registerViewModel = ViewModelProviders.of(this, registerViewModelFactory).get(RegisterViewModel::class.java)
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
@@ -96,7 +105,9 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         progressBar.visibility = View.VISIBLE
-        auth.createUserWithEmailAndPassword(emailEditText.text.toString(), passwordEditText.text.toString())
+        val user = User(nameEditText.text.toString(), surnameEditText.text.toString(), emailEditText.text.toString())
+        registerViewModel.register(emailEditText.text.toString(), passwordEditText.text.toString(), user)
+       /* auth.createUserWithEmailAndPassword(emailEditText.text.toString(), passwordEditText.text.toString())
             .addOnCompleteListener(this) { task ->
                 try {
 
@@ -129,6 +140,6 @@ class RegisterActivity : AppCompatActivity() {
                 catch (e: Throwable) {
                     Toast.makeText(baseContext, e.message.toString(), Toast.LENGTH_LONG).show()
                 }
-            }
+            }*/
     }
 }
