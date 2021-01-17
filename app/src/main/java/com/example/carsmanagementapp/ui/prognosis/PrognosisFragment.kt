@@ -50,12 +50,22 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
         prognosisViewModelFactory = PrognosisViewModelFactory(repository)
         prognosisViewModel = ViewModelProviders.of(this, prognosisViewModelFactory).get(PrognosisViewModel::class.java)
 
-        prognosisViewModel.loadDatabase().observe(viewLifecycleOwner, Observer {
+        /*prognosisViewModel.loadDatabase().observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 cars = it
                 prognosisAdapter = PrognosisAdapter(cars, this)
                 recyclerView.adapter = prognosisAdapter
             }
+        })*/
+        prognosisViewModel.carsLiveData.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                cars = it
+                prognosisAdapter = PrognosisAdapter(cars, this)
+                recyclerView.adapter = prognosisAdapter
+            }
+        })
+        prognosisViewModel.carsMessageLiveData.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(mContext, it, Toast.LENGTH_LONG).show()
         })
 
         /*prognosisViewModel.actualCarList.observe(viewLifecycleOwner, {
@@ -82,6 +92,11 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
 
 
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        prognosisViewModel.loadDatabase()
     }
 
     override fun onItemClick(item: Car, position: Int) {

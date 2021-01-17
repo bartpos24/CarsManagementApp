@@ -7,6 +7,13 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Ustawienia</string>
 
+    //MainActivity
+    <string name="userLoadError">Ten użytkownik nie podał danych osobowych</string>
+    <string name="signOut">Pomyślnie wylogowano</string>
+
+    //Repositories
+    <string name="loadDatabaseError">Nie można pobrać danych</string>
+
     //Login activity
     //Login activity
     <string name="email_editText">E-mail</string>
@@ -33,6 +40,8 @@
     <string name="passwordRepeat">Powtórz hasło</string>
     <string name="e_repeatPassword">Hasła nie są takie same!</string>
     <string name="e_email_exists">Konto z takim emailem już istnieje</string>
+    <string name="addUser">Pomyślnie zarejestrowano i dodano użytkownika</string>
+    <string name="addUserError">Dodawanie użytkownika nie powiodło się</string>
 
 
     <string name="menu_home">Home</string>
@@ -69,7 +78,7 @@
     <string name="addingFailed">Dodawanie nie powiodło się, spróbuj ponownie</string>
     <string name="engineTypeError">Niepoprawny typ silnika</string>
     <string name="carTypeError">Niepoprawny typ samochodu</string>
-    <string name="add">Dodano</string>
+    <string name="add">Dodano samochód</string>
 
 
 
@@ -83,7 +92,7 @@
     </string-array>
 
     <string-array name="carType">
-        <item>HETCHABCK</item>
+        <item>HETCHBACK</item>
         <item>SEDAN</item>
         <item>COMBI</item>
         <item>SUV</item>
@@ -110,6 +119,8 @@
     <string name="updateError">Samochód został sprzedany lub usunięty</string>
     <string name="soldingSuccesful">Sprzedaż zakończona pomyślnie</string>
     <string name="deletingSuccesful">Usuwanie zakończone pomyślnie</string>
+    <string name="soldingError">Sprzedaż nie powiodła się</string>
+    <string name="deletingError">Usuwanie nie powiodło się</string>
 
 
     //Statistics Fragment
@@ -142,5 +153,12 @@
     <string name="compareEror">Proszę wybrać dwa samochody do porównania</string>
     <string name="chooseCars">Wybierz dwa samochody. Odznacz jeden i wybierz inny</string>
     <string name="prognosisResult">Lepszy samochód to:</string>
+
+
+    //UpdateActivity
+    <string name="updateSuccessful">Pomyślnie zaktualizowano samochód</string>
+    <string name="errorUpdate">Aktualizacja nie powiodła się</string>
+    <string name="carFindError">Does not have this car</string>
+    <string name="carLoadError">Load car error</string>
 
 </resources>

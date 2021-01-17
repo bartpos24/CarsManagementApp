@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.carsmanagementapp.Model.User
 import com.example.carsmanagementapp.R
@@ -47,7 +48,13 @@ class RegisterActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance()
         ref = database.getReference("Users")
         initUI()
-        registerButton.setOnClickListener { registerUser() }
+        registerButton.setOnClickListener {
+            registerUser()
+            clearUI()
+        }
+        registerViewModel.registerMesageLiveData.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
     }
 
     private fun initUI() {
@@ -59,6 +66,13 @@ class RegisterActivity : AppCompatActivity() {
         repeatPasswordEditText = findViewById(R.id.passwordRepeat_register_editText)
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.GONE
+    }
+    private fun clearUI() {
+        nameEditText.text.clear()
+        surnameEditText.text.clear()
+        emailEditText.text.clear()
+        passwordEditText.text.clear()
+        repeatPasswordEditText.text.clear()
     }
 
     private fun registerUser() {
@@ -107,39 +121,6 @@ class RegisterActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         val user = User(nameEditText.text.toString(), surnameEditText.text.toString(), emailEditText.text.toString())
         registerViewModel.register(emailEditText.text.toString(), passwordEditText.text.toString(), user)
-       /* auth.createUserWithEmailAndPassword(emailEditText.text.toString(), passwordEditText.text.toString())
-            .addOnCompleteListener(this) { task ->
-                try {
-
-                    if (task.isSuccessful) {
-                        val user = auth.currentUser
-                        val userToDatabase = User(nameEditText.text.toString(), surnameEditText.text.toString(), emailEditText.text.toString())
-
-                        user?.sendEmailVerification()
-                            ?.addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    progressBar.visibility = View.GONE
-                                    Toast.makeText(baseContext, resources.getString(R.string.p_register_success), Toast.LENGTH_LONG).show()
-                                    val uid = auth.currentUser!!.uid
-                                    ref.child(uid).setValue(userToDatabase)
-                                    auth.signOut()
-                                    startActivity(Intent(this, LoginActivity::class.java))
-                                    finish()
-                                }
-                            }
-
-                    }
-                    else {
-                        progressBar.visibility = View.GONE
-                        throw task.exception as Throwable
-                    }
-                }
-                catch (existsEmail: FirebaseAuthUserCollisionException) {
-                    Toast.makeText(baseContext, resources.getString(R.string.e_email_exists), Toast.LENGTH_LONG).show()
-                }
-                catch (e: Throwable) {
-                    Toast.makeText(baseContext, e.message.toString(), Toast.LENGTH_LONG).show()
-                }
-            }*/
+        progressBar.visibility = View.GONE
     }
 }

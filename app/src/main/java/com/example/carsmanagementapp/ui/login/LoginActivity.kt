@@ -29,9 +29,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var registerBtn: Button
     private lateinit var progressBar: ProgressBar
 
-    private lateinit var auth: FirebaseAuth
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -41,19 +38,29 @@ class LoginActivity : AppCompatActivity() {
         loginViewModelFactory = LoginViewModelFactory(repository)
         loginViewModel = ViewModelProviders.of(this, loginViewModelFactory).get(LoginViewModel::class.java)
 
-        auth = FirebaseAuth.getInstance()
+        loginBtn.setOnClickListener {
+            doLogin()
+            loginViewModel.userLiveData.observe(this, Observer {
+                if (it != null) {
+                    progressBar.visibility = View.GONE
+                    updateUI(it)
+                }
+            })
+        }
 
-
-        loginBtn.setOnClickListener { doLogin() }
+        loginViewModel.loginMessageLiveData.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
         registerBtn.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
     override fun onStart() {
         super.onStart()
-        val currentUser = loginViewModel.getCurrentUser()
-
-        updateUI(currentUser)
+        var user = loginViewModel.getCurrentUser()
+        if (user != null) {
+            updateUI(user)
+        }
     }
 
     private fun initUI() {
@@ -91,31 +98,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         progressBar.visibility = View.VISIBLE
+        loginViewModel.getLogin(emailEditText.text.toString(), passwordEditText.text.toString())
 
-        loginViewModel.getLogin(emailEditText.text.toString(), passwordEditText.text.toString()).observe(this, Observer {
-            if (it != null) {
-                val user = it
-                progressBar.visibility = View.GONE
-                updateUI(user)
-
-            }
-        })
-        /*val user = loginViewModel.getCurrentUser()
-        updateUI(user)*/
         progressBar.visibility = View.GONE
-        /*auth.signInWithEmailAndPassword(emailEditText.text.toString(), passwordEditText.text.toString())
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    progressBar.visibility = View.GONE
-                    val user = auth.currentUser
-                    Toast.makeText(this, R.string.login_success, Toast.LENGTH_LONG).show()
-                    updateUI(user)
-                } else {
-                    progressBar.visibility = View.GONE
-                    Toast.makeText(baseContext, resources.getString(R.string.e_login_fail), Toast.LENGTH_LONG).show()
-                    updateUI(null)
-                }
-            }*/
+
     }
 
 

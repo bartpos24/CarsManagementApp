@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.*
 import androidx.core.view.get
 import androidx.core.view.iterator
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.carsmanagementapp.Model.Car
@@ -20,6 +21,7 @@ import java.lang.NumberFormatException
 class UpdateActivity : AppCompatActivity() {
 
     private lateinit var updateViewModelFactory: UpdateViewModelFactory
+    private lateinit var updateViewModel: UpdateViewModel
     private lateinit var updateBtn: Button
     private lateinit var brandET: EditText
     private lateinit var modelET: EditText
@@ -39,7 +41,7 @@ class UpdateActivity : AppCompatActivity() {
         updateBtn = findViewById(R.id.updateBtnUp)
         val repository = DatabaseRepository()
         updateViewModelFactory = UpdateViewModelFactory(repository)
-        val updateViewModel = ViewModelProviders.of(this, updateViewModelFactory).get(UpdateViewModel::class.java)
+        updateViewModel = ViewModelProviders.of(this, updateViewModelFactory).get(UpdateViewModel::class.java)
 
         initUI()
 
@@ -47,8 +49,6 @@ class UpdateActivity : AppCompatActivity() {
 
         engTypeSpinner.setSelection(getIndex(engTypeSpinner, car.engType.toString()))
         carTypeSpinner.setSelection(getIndex(carTypeSpinner, car.carType.toString()))
-
-
 
         engTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -96,17 +96,15 @@ class UpdateActivity : AppCompatActivity() {
                 else {
                     val car = Car(car.id, brandET.text.toString(), modelET.text.toString(), typeOfCar, cap, pow, year, typeOfEngine, colorET.text.toString())
                     updateViewModel.updateCar(car)
-                    var sb: String = ""
-                    sb = resources.getString(R.string.update) + " ${car.brand} ${car.model}"
-                    Toast.makeText(this, sb , Toast.LENGTH_LONG).show()
+
                 }
 
             }
         }
 
-
-
-
+        updateViewModel.messageLiveData.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
     }
 
     private fun capSelectedView(): Double {

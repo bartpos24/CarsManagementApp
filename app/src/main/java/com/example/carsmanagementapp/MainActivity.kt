@@ -16,13 +16,17 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.carsmanagementapp.Model.User
+import com.example.carsmanagementapp.repositories.AuthenticationRepository
 import com.example.carsmanagementapp.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.lang.StringBuilder
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,8 +35,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var emailView: TextView
     private lateinit var logoutButton: ImageButton
 
-
-    private lateinit var auth: FirebaseAuth
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var mainViewModelFactory: MainViewModelFactory
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,30 +55,28 @@ class MainActivity : AppCompatActivity() {
         emailView = hView.findViewById(R.id.emailView)
         logoutButton = hView.findViewById(R.id.logoutButton)
 
-
-        auth = FirebaseAuth.getInstance()
-        var ref = FirebaseDatabase.getInstance().getReference("Users").child(auth.currentUser!!.uid)
-
-
-
-        val loginListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                var user = snapshot.getValue(User::class.java)
-                nameAndSurname.text = user?.name.toString() +" "+ user?.surname.toString()
-                emailView.text = user?.email.toString()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(applicationContext, "Dont' have data", Toast.LENGTH_LONG).show()
-            }
-        }
-        ref.addListenerForSingleValueEvent(loginListener)
+        val repository = AuthenticationRepository()
+        mainViewModelFactory = MainViewModelFactory(repository)
+        mainViewModel = ViewModelProviders.of(this, mainViewModelFactory).get(MainViewModel::class.java)
 
         logoutButton.setOnClickListener {
-            auth.signOut()
-            startActivity(Intent(applicationContext, LoginActivity::class.java))
+            mainViewModel.logout()
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+
+        mainViewModel.mainMessageLiveData.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
+
+        mainViewModel.userLiveData.observe(this, Observer {
+            if (it != null) {
+                var sb = StringBuilder()
+                sb.append(it.name.toString()).append(" ").append(it.surname.toString())
+                nameAndSurname.text = sb.toString()
+                emailView.text = it.email.toString()
+            }
+        })
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
@@ -85,6 +87,11 @@ class MainActivity : AppCompatActivity() {
         ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mainViewModel.getUser()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

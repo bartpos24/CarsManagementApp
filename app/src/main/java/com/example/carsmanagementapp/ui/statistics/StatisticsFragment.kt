@@ -1,5 +1,6 @@
 package com.example.carsmanagementapp.ui.statistics
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.carsmanagementapp.Model.Car
@@ -16,6 +18,7 @@ import java.util.ArrayList
 
 class StatisticsFragment : Fragment() {
 
+    private lateinit var mContext: Context
     private lateinit var statisticsViewModelFactory: StatisticsViewModelFactory
     private lateinit var statisticsViewModel: StatisticsViewModel
     private var list: ArrayList<Car> = ArrayList()
@@ -109,15 +112,11 @@ class StatisticsFragment : Fragment() {
         p400S = view.findViewById(R.id.p400S)
 
 
-
-
-
-        //carTypeChart = view.findViewById(R.id.carTypeChart)
         val repository = DatabaseRepository()
         statisticsViewModelFactory = StatisticsViewModelFactory(repository)
         statisticsViewModel = ViewModelProviders.of(this, statisticsViewModelFactory).get(StatisticsViewModel::class.java)
 
-        statisticsViewModel.getDatabase().observe(viewLifecycleOwner, Observer {
+        statisticsViewModel.carsLiveData.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 list = it
                 var carList = statisticsViewModel.loadCarType(list)
@@ -148,40 +147,8 @@ class StatisticsFragment : Fragment() {
 
             }
         })
-        /*statisticsViewModel.loadDatabase()
-        statisticsViewModel.loadSoldDatabase()
-        statisticsViewModel.actualCars.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                list = it
-                var carList = statisticsViewModel.loadCarType(list)
-                var engineList = statisticsViewModel.loadEngineType(list)
-                var powerList = statisticsViewModel.loadPower(list)
 
-                hetchbackActual.text = carList[1].toString()
-                sedanActual.text = carList[2].toString()
-                combiActual.text = carList[3].toString()
-                suvActual.text = carList[4].toString()
-                cabrioletActual.text = carList[5].toString()
-                vanActual.text = carList[6].toString()
-                pickupActual.text = carList[7].toString()
-                coupeActual.text = carList[8].toString()
-
-                dieselActual.text = engineList[1].toString()
-                benzineActual.text = engineList[2].toString()
-                lpgActual.text = engineList[3].toString()
-                electricActual.text = engineList[4].toString()
-                hybridActual.text = engineList[5].toString()
-
-                minA.text = powerList[0].toString()
-                hundredA.text = powerList[1].toString()
-                hundred50A.text = powerList[2].toString()
-                p200A.text = powerList[3].toString()
-                p300A.text = powerList[4].toString()
-                p400A.text = powerList[5].toString()
-
-            }
-        })*/
-        statisticsViewModel.getSoldDatabase().observe(viewLifecycleOwner, Observer {
+        statisticsViewModel.soldCarsLiveData.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 soldList = it
                 var carList = statisticsViewModel.loadCarType(soldList)
@@ -210,39 +177,20 @@ class StatisticsFragment : Fragment() {
                 p400S.text = powerList[5].toString()
             }
         })
-        /*statisticsViewModel.soldCars.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                soldList = it
-                var carList = statisticsViewModel.loadCarType(soldList)
-                var engineList = statisticsViewModel.loadEngineType(soldList)
-                var powerList = statisticsViewModel.loadPower(soldList)
-                hetchbackSold.text = carList[1].toString()
-                sedanSold.text = carList[2].toString()
-                combiSold.text = carList[3].toString()
-                suvSold.text = carList[4].toString()
-                cabrioletSold.text = carList[5].toString()
-                vanSold.text = carList[6].toString()
-                pickupSold.text = carList[7].toString()
-                coupeSold.text = carList[8].toString()
-
-                dieselSold.text = engineList[1].toString()
-                benzineSold.text = engineList[2].toString()
-                lpgSold.text = engineList[3].toString()
-                electricSold.text = engineList[4].toString()
-                hybridSold.text = engineList[5].toString()
-
-                minS.text = powerList[0].toString()
-                hundredS.text = powerList[1].toString()
-                hundred50S.text = powerList[2].toString()
-                p200S.text = powerList[3].toString()
-                p300S.text = powerList[4].toString()
-                p400S.text = powerList[5].toString()
-            }
-        })*/
-
-
+        statisticsViewModel.carsMessageLiveData.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(mContext, it, Toast.LENGTH_LONG).show()
+        })
 
         return view
+    }
+    override fun onStart() {
+        super.onStart()
+        statisticsViewModel.getDatabase()
+        statisticsViewModel.getSoldDatabase()
+    }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

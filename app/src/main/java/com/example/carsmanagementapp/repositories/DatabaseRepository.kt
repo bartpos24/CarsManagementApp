@@ -1,8 +1,9 @@
 package com.example.carsmanagementapp.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.carsmanagementapp.Model.Car
+import com.example.carsmanagementapp.R.string.*
+import com.example.carsmanagementapp.interfaces.ResponseDatabaseAction
+import com.example.carsmanagementapp.interfaces.ResponseDetailsAction
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -14,17 +15,12 @@ class DatabaseRepository {
     private val refSoldCar: DatabaseReference = FirebaseDatabase.getInstance().getReference("Cars").child(auth.currentUser!!.uid).child("SoldCars")
 
     private val actualCarList: ArrayList<Car> = ArrayList()
-    private val actualCars: MutableLiveData<ArrayList<Car>> = MutableLiveData<ArrayList<Car>>()
     private val soldedCarList: ArrayList<Car> = ArrayList()
-    private val soldedCars: MutableLiveData<ArrayList<Car>> = MutableLiveData<ArrayList<Car>>()
-    private val carDetails: MutableLiveData<Car> = MutableLiveData<Car>()
 
-
-
-    private fun loadDatabase() {
-        refCar.addValueEventListener(object: ValueEventListener {
+    fun loadDatabase(callback: ResponseDatabaseAction) {
+        refCar.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                callback.onMessage(com.example.carsmanagementapp.R.string.loadDatabaseError)
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -33,15 +29,16 @@ class DatabaseRepository {
                         var car = h.getValue(Car::class.java)
                         actualCarList.add(car!!)
                     }
-                    actualCars.value = actualCarList
+                    callback.onSuccess(actualCarList)
+                    //actualCars.value = actualCarList
                 }
             }
         })
     }
-    private fun loadSoldDatabase() {
+    fun loadSoldDatabase(callback: ResponseDatabaseAction) {
         refSoldCar.addValueEventListener(object: ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                callback.onMessage(loadDatabaseError)
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -50,55 +47,75 @@ class DatabaseRepository {
                         var car = h.getValue(Car::class.java)
                         soldedCarList.add(car!!)
                     }
-                    soldedCars.value = soldedCarList
+                    callback.onSuccess(soldedCarList)
+                    //soldedCars.value = soldedCarList
                 }
             }
         })
     }
-    private fun loadCar(id: String) {
+
+    fun loadCar(id: String, callback: ResponseDetailsAction) {
         refCar.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+                callback.onMessage(carLoadError)
+            }
+
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (h in snapshot.children) {
-                        val car = h.getValue(Car::class.java)
-                        if (id == car!!.id) {
-                            carDetails.value = car
+                        var car = h.getValue(Car::class.java)
+                        if (car!!.id == id) {
+                            callback.onSuccess(car)
                         }
                     }
                 }
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
         })
     }
-    fun getDatabase(): LiveData<ArrayList<Car>> {
-        loadDatabase()
-        return actualCars
-    }
-    fun getSoldDatabase(): LiveData<ArrayList<Car>> {
-        loadSoldDatabase()
-        return soldedCars
-    }
 
-    fun addCar(car: Car) {
+    fun addCar(car: Car, callback: ResponseDatabaseAction) {
         var id = refCar.push().key
         car.id = id!!
-        refCar.child(id).setValue(car)
+        refCar.child(id).setValue(car).addOnCompleteListener {
+            if (it.isSuccessful){
+                callback.onMessage(add)
+            }
+            else
+                callback.onMessage(addingFailed)
+        }
     }
-    fun getCar(id: String): LiveData<Car> {
-        loadCar(id)
-        return  carDetails
+
+    fun deleteCar(car: Car, callback: ResponseDetailsAction) {
+        refCar.child(car.id).setValue(null).addOnCompleteListener {
+            if (it.isSuccessful){
+                callback.onMessage(deletingSuccesful)
+            }
+            else {
+                callback.onMessage(deletingError)
+            }
+        }
     }
-    fun deleteCar(car: Car) {
-        refCar.child(car.id).setValue(null)
+    fun soldCar(car: Car, callback: ResponseDetailsAction) {
+        refCar.child(car.id).setValue(null).addOnCompleteListener {
+            if (it.isSuccessful) {
+                refSoldCar.child(car.id).setValue(car).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        callback.onMessage(soldingSuccesful)
+                    }
+                    else
+                        callback.onMessage(soldingError)
+                }
+            }
+        }
+
     }
-    fun soldCar(car: Car) {
-        refCar.child(car.id).setValue(null)
-        refSoldCar.child(car.id).setValue(car)
-    }
-    fun updateCar(car: Car) {
-        refCar.child(car.id).setValue(car)
+    fun updateCar(car: Car, callback: ResponseDatabaseAction) {
+        refCar.child(car.id).setValue(car).addOnCompleteListener {
+            if (it.isSuccessful) {
+                callback.onMessage(updateSuccessful)
+            }
+            else
+                callback.onMessage(errorUpdate)
+        }
     }
 }

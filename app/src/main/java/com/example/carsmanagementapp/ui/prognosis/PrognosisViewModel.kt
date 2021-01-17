@@ -1,25 +1,30 @@
 package com.example.carsmanagementapp.ui.prognosis
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.carsmanagementapp.Model.Car
+import com.example.carsmanagementapp.interfaces.ResponseDatabaseAction
 import com.example.carsmanagementapp.repositories.DatabaseRepository
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import kotlin.math.PI
 import kotlin.math.exp
 import kotlin.math.pow
 import kotlin.math.sqrt
 
 class PrognosisViewModel(private val repository: DatabaseRepository) : ViewModel() {
+    val carsLiveData = MutableLiveData<ArrayList<Car>>()
+    val carsMessageLiveData = MutableLiveData<Int>()
 
 
-    fun loadDatabase(): LiveData<ArrayList<Car>> {
-        return repository.getDatabase()
+    fun loadDatabase(){
+        repository.loadDatabase(object : ResponseDatabaseAction {
+            override fun onSuccess(cars: ArrayList<Car>) {
+                carsLiveData.value = cars
+            }
+
+            override fun onMessage(message: Int) {
+                carsMessageLiveData.value = message
+            }
+        })
     }
 
     fun prognosisValidation(car1: Car, car2: Car): Car {

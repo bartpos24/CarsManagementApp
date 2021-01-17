@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {
 
+    private lateinit var detailsViewModel: DetailsViewModel
     private lateinit var brandTV: TextView
     private lateinit var modelTV: TextView
     private lateinit var colorTV: TextView
@@ -35,9 +36,8 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var updateBtn: Button
     private lateinit var deleteBtn: Button
     private lateinit var soldBtn: Button
-    private lateinit var car: Car
-
     private lateinit var detailsViewModelFactory: DetailsViewModelFactory
+    private lateinit var car: Car
 
 
 
@@ -48,20 +48,13 @@ class DetailsActivity : AppCompatActivity() {
 
         val repository = DatabaseRepository()
         detailsViewModelFactory = DetailsViewModelFactory(repository)
-        val detailsViewModel = ViewModelProviders.of(this, detailsViewModelFactory).get(DetailsViewModel::class.java)
+        detailsViewModel = ViewModelProviders.of(this, detailsViewModelFactory).get(DetailsViewModel::class.java)
         var id = intent.getStringExtra("id")
 
-
-        detailsViewModel.loadCar(id!!).observe(this, {
+        detailsViewModel.getCar(id!!)
+        detailsViewModel.carLiveData.observe(this, Observer {
             car = it
-            brandTV.text = it.brand
-            modelTV.text = it.model
-            colorTV.text = it.color
-            capacityTV.text = it.engCap.toString()
-            powerTV.text = it.power.toString()
-            yearTV.text = it.year.toString()
-            carTypeTV.text = it.carType.toString()
-            engineTypeTV.text = it.engType.toString()
+            displayCar(car)
         })
 
         updateBtn.setOnClickListener {
@@ -77,11 +70,6 @@ class DetailsActivity : AppCompatActivity() {
         soldBtn.setOnClickListener {
             if (modelTV.text != "") {
                 detailsViewModel.soldCar(car!!)
-
-                detailsViewModel.result.observe(this, Observer {
-                    Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-                })
-
                 clearET()
             }
             else {
@@ -89,13 +77,12 @@ class DetailsActivity : AppCompatActivity() {
             }
 
         }
+        detailsViewModel.messageLiveData.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
         deleteBtn.setOnClickListener {
             if (modelTV.text != "") {
                 detailsViewModel.deleteCar(car!!)
-
-                detailsViewModel.result.observe(this, Observer {
-                    Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-                })
 
                 clearET()
             }
@@ -104,6 +91,7 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun initUI() {
         brandTV = findViewById(R.id.brandDetailsTV)
         modelTV = findViewById(R.id.modelDetailsTV)
@@ -127,5 +115,15 @@ class DetailsActivity : AppCompatActivity() {
         powerTV.text = ""
         yearTV.text = ""
         capacityTV.text = ""
+    }
+    private fun displayCar(car: Car) {
+        brandTV.text = car.brand
+        modelTV.text = car.model
+        colorTV.text = car.color
+        capacityTV.text = car.engCap.toString()
+        powerTV.text = car.power.toString()
+        yearTV.text = car.year.toString()
+        carTypeTV.text = car.carType.toString()
+        engineTypeTV.text = car.engType.toString()
     }
 }

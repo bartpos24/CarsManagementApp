@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -42,14 +43,27 @@ class CarsFragment : Fragment() {
         recyclerView.layoutManager = carsMenager
 
 
-        carsViewModel.getDatabase().observe(viewLifecycleOwner, Observer {
+        carsViewModel.carsLiveData.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 cars = it
                 carsAdapter = CarsAdapter((cars))
                 recyclerView.adapter = carsAdapter
             }
         })
+        carsViewModel.carsMessageLiveData.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(mContext, it, Toast.LENGTH_LONG).show()
+        })
 
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        carsViewModel.getDatabase()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
     }
 }

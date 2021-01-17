@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.carsmanagementapp.Model.Car
@@ -138,8 +139,10 @@ class AddCar : Fragment() {
 
             }
                 Toast.makeText(mContext, R.string.addingFailed, Toast.LENGTH_LONG).show()*/
-
         }
+        addCarViewModel.carsMessageLiveData.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(mContext, it, Toast.LENGTH_LONG).show()
+        })
 
         return view
     }

@@ -1,72 +1,42 @@
 package com.example.carsmanagementapp.ui.statistics
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.carsmanagementapp.Model.Car
 import com.example.carsmanagementapp.Model.Enum.CarType
 import com.example.carsmanagementapp.Model.Enum.EngineType
+import com.example.carsmanagementapp.interfaces.ResponseDatabaseAction
 import com.example.carsmanagementapp.repositories.DatabaseRepository
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
 
 class StatisticsViewModel(private val repository: DatabaseRepository) : ViewModel() {
-    /*private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
 
-    private var ref: DatabaseReference = database.getReference("Cars").child(auth.currentUser!!.uid).child("ActualCars")
-    var allCars: ArrayList<Car> = ArrayList<Car>()
-    var carsSold: ArrayList<Car> = ArrayList<Car>()
+    val carsLiveData = MutableLiveData<ArrayList<Car>>()
+    val carsMessageLiveData = MutableLiveData<Int>()
+    val soldCarsLiveData = MutableLiveData<ArrayList<Car>>()
 
-    var actualCars: MutableLiveData<ArrayList<Car>> = MutableLiveData()
-    var soldCars: MutableLiveData<ArrayList<Car>> = MutableLiveData()
-*/
-
-
-    fun getDatabase(): LiveData<ArrayList<Car>> {
-        return repository.getDatabase()
-    }
-    fun getSoldDatabase(): LiveData<java.util.ArrayList<Car>> {
-        return repository.getSoldDatabase()
-    }
-
-    /*fun loadDatabase() {
-        ref = database.getReference("Cars").child(auth.currentUser!!.uid).child("ActualCars")
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (h in snapshot.children) {
-                        val car = h.getValue(Car::class.java)
-                        allCars.add(car!!)
-                    }
-                    actualCars.value = allCars
-                }
+    fun getDatabase() {
+        repository.loadDatabase(object : ResponseDatabaseAction {
+            override fun onSuccess(cars: ArrayList<Car>) {
+                carsLiveData.value = cars
             }
 
-            override fun onCancelled(error: DatabaseError) {
-
+            override fun onMessage(errorMessage: Int) {
+                carsMessageLiveData.value = errorMessage
             }
         })
     }
-    fun loadSoldDatabase() {
-        ref = database.getReference("Cars").child(auth.currentUser!!.uid).child("SoldCars")
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (h in snapshot.children) {
-                        val car = h.getValue(Car::class.java)
-                        carsSold.add(car!!)
-                    }
-                    soldCars.value = carsSold
-                }
+    fun getSoldDatabase(){
+        repository.loadSoldDatabase(object : ResponseDatabaseAction {
+            override fun onSuccess(cars: ArrayList<Car>) {
+                soldCarsLiveData.value = cars
             }
 
-            override fun onCancelled(error: DatabaseError) {
-
+            override fun onMessage(message: Int) {
+                carsMessageLiveData.value = message
             }
         })
-    }*/
+    }
+
 
     fun loadPower(cars: ArrayList<Car>): ArrayList<Int> {
         var powerList: ArrayList<Int> = ArrayList<Int>()
