@@ -2,7 +2,7 @@ package com.example.carsmanagementapp.Model.Enum
 
 enum class CarType(number: Int) {
     NONE(0),
-    HETCHABCK(1),
+    HETCHBACK(1),
     SEDAN(2),
     COMBI(3),
     SUV(4),

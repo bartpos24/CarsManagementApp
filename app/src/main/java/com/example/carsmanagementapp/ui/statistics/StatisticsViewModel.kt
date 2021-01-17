@@ -90,7 +90,7 @@ class StatisticsViewModel(private val repository: DatabaseRepository) : ViewMode
         for (i in cars) {
             if (i.carType == CarType.NONE)
                 none += 1
-            else if (i.carType == CarType.HETCHABCK)
+            else if (i.carType == CarType.HETCHBACK)
                 hetch += 1
             else if (i.carType == CarType.SEDAN)
                 sedan += 1

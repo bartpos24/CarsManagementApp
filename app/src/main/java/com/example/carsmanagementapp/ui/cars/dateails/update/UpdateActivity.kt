@@ -179,7 +179,7 @@ class UpdateActivity : AppCompatActivity() {
     }
     private fun carSelectedView(position: Int) {
         if (position == 0)
-            typeOfCar = CarType.HETCHABCK
+            typeOfCar = CarType.HETCHBACK
         else if (position == 1)
             typeOfCar = CarType.SEDAN
         else if (position == 2)
