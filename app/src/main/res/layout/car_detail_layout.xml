@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_bettercar">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/llBrand"
@@ -29,20 +28,14 @@
             android:textColor="#000000" />
 
         <TextView
-            android:id="@+id/betterBrandTV"
+            android:id="@+id/selectedBrandTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="TextView" />
 
-        <TextView
-            android:id="@+id/worseBrandTV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
+
 
     </LinearLayout>
 
@@ -69,20 +62,14 @@
             android:textColor="#000000"/>
 
         <TextView
-            android:id="@+id/betterModelTV"
+            android:id="@+id/selectedModelTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="TextView" />
 
-        <TextView
-            android:id="@+id/worseModelTV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -108,20 +95,13 @@
             android:textColor="#000000"/>
 
         <TextView
-            android:id="@+id/betterCarTypeTV"
+            android:id="@+id/selectedCarTypeTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="TextView" />
 
-        <TextView
-            android:id="@+id/worseCarTypeTV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
@@ -147,20 +127,13 @@
             android:textColor="#000000"/>
 
         <TextView
-            android:id="@+id/betterEngineTypeTV"
+            android:id="@+id/selectedEngineTypeTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="TextView" />
 
-        <TextView
-            android:id="@+id/worseEngineTypeTV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
     </LinearLayout>
 
     <LinearLayout
@@ -186,20 +159,14 @@
             android:textColor="#000000"/>
 
         <TextView
-            android:id="@+id/betterCapacityTV"
+            android:id="@+id/selectedCapacityTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="TextView" />
 
-        <TextView
-            android:id="@+id/worseCapacityTV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -225,35 +192,59 @@
             android:textColor="#000000"/>
 
         <TextView
-            android:id="@+id/betterPowerTV"
+            android:id="@+id/selectedPowerTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="TextView" />
 
-        <TextView
-            android:id="@+id/worsePowerTV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
+
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/llColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="16dp"
 
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/llPower"
+        tools:layout_editor_absoluteX="30dp">
+
+
+        <TextView
+            android:id="@+id/colorTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/color"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/selectedColorTV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
 
         android:layout_weight="1"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/llPower"
+        app:layout_constraintTop_toBottomOf="@+id/llColor"
         tools:layout_editor_absoluteX="30dp">
 
 
@@ -267,20 +258,13 @@
             android:textColor="#000000" />
 
         <TextView
-            android:id="@+id/betterYearTV"
+            android:id="@+id/selectedYearTV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="TextView" />
 
-        <TextView
-            android:id="@+id/worseYearTV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="TextView" />
     </LinearLayout>
 
 

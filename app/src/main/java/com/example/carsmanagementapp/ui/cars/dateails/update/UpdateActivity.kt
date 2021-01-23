@@ -1,8 +1,13 @@
 package com.example.carsmanagementapp.ui.cars.dateails.update
 
+import android.app.AlertDialog
+import android.content.Context
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.core.view.get
@@ -16,7 +21,15 @@ import com.example.carsmanagementapp.Model.Enum.EngineType
 import com.example.carsmanagementapp.R
 import com.example.carsmanagementapp.repositories.DatabaseRepository
 import com.example.carsmanagementapp.ui.cars.dateails.DetailsViewModel
+import com.example.carsmanagementapp.utils.DecimalDigitsInputFilter
+import com.example.carsmanagementapp.utils.MaxLengthInputFilter
+import com.skydoves.colorpickerview.ColorPickerView
+import com.skydoves.colorpickerview.flag.BubbleFlag
+import com.skydoves.colorpickerview.flag.FlagMode
+import com.skydoves.colorpickerview.listeners.ColorListener
+import com.skydoves.colorpickerview.sliders.BrightnessSlideBar
 import java.lang.NumberFormatException
+import java.util.*
 
 class UpdateActivity : AppCompatActivity() {
 
@@ -28,9 +41,10 @@ class UpdateActivity : AppCompatActivity() {
     private lateinit var yearET: EditText
     private lateinit var capacityET: EditText
     private lateinit var powerET: EditText
-    private lateinit var colorET: EditText
+    private lateinit var colorBT: Button
     private lateinit var engTypeSpinner: Spinner
     private lateinit var carTypeSpinner: Spinner
+    private var colorstr:String = ""
     var typeOfCar = CarType.NONE
     var typeOfEngine = EngineType.NONE
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,8 +93,62 @@ class UpdateActivity : AppCompatActivity() {
             }
         }
 
+        colorBT.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(R.string.colorpicker_header)
+
+            val inflater = LayoutInflater.from(this)
+            val view = inflater.inflate(R.layout.color_picker, null)
+            val btAccept =  view.findViewById<TextView>(R.id.BtAccept)
+            val btDecline =  view.findViewById<TextView>(R.id.BtDecline)
+            var tempColor:String = ""
+            val colorPicker = view.findViewById<ColorPickerView>(R.id.colorPickerView)
+            colorPicker.selectCenter()
+            val bubbleFlag = BubbleFlag(this)
+            bubbleFlag.flagMode = FlagMode.FADE
+            colorPicker.setFlagView(bubbleFlag)
+
+            val brightnessSlideBar = view.findViewById<BrightnessSlideBar>(R.id.brightnessSlideBar)
+
+
+            colorPicker.attachBrightnessSlider(brightnessSlideBar)
+
+
+            builder.setView(view)
+            val alert = builder.create()
+
+
+            colorPicker.setColorListener(ColorListener { color, fromUser ->
+
+
+                tempColor = String.format("#%06X", 0xFFFFFF and color)
+
+            })
+
+            btAccept.setOnClickListener {
+                colorstr = tempColor
+                colorBT.setBackgroundColor(Color.parseColor(tempColor))
+                colorBT.text = ""
+                alert.cancel();
+            }
+
+            btDecline.setOnClickListener {
+                alert.cancel();
+            }
+            alert.show()
+        }
+
         updateBtn.setOnClickListener {
-            var cap = capSelectedView()
+            var validation = validationCar()
+            if (validation) {
+                val car = Car(car.id, brandET.text.toString(), modelET.text.toString(), typeOfCar, capacityET.text.toString().toDouble(), powerET.text.toString().toInt(), yearET.text.toString().toInt(), typeOfEngine, colorstr)
+                updateViewModel.updateCar(car)
+            }
+            else {
+                //Potencjalna obsługa błędu
+
+            }
+            /*var cap = capSelectedView()
             var pow = powerSelectedView()
             var year = yearSelectedView()
             if (cap != 0.0 && pow != 0 && year != 0 && typeOfEngine != EngineType.NONE && typeOfCar != CarType.NONE) {
@@ -100,6 +168,7 @@ class UpdateActivity : AppCompatActivity() {
                 }
 
             }
+            */
         }
 
         updateViewModel.messageLiveData.observe(this, Observer {
@@ -107,7 +176,108 @@ class UpdateActivity : AppCompatActivity() {
         })
     }
 
+    private fun validationCar() : Boolean{
+        var validation: Boolean = true
+        if (brandET.text.toString() == "") {
+            brandET.error = resources.getString(R.string.brandError)
+            validation = false
+        }
+        if (modelET.text.toString() == "") {
+            modelET.error = resources.getString(R.string.modelError)
+            validation = false
+        }
+        colorBT.error = null
+        if (colorstr == "") {
+            colorBT.error = resources.getString(R.string.colorError)
+            validation = false
+        }
+        var cap = capSelectedView()
+
+        if (cap <= 0.0) {
+            capacityET.error = resources.getString(R.string.capacityError)
+            validation = false
+        }
+        else if(cap > 10.0)
+        {
+            capacityET.error = resources.getString(R.string.capacityError2)
+            validation = false
+        }
+        var pow = powerSelectedView()
+        if (pow == 0 || pow < 0) {
+            powerET.error = resources.getString(R.string.powerError)
+            validation = false
+        }
+        else if(pow > 1000)
+        {
+            powerET.error = resources.getString(R.string.powerError2)
+            validation = false
+        }
+        var year = yearSelectedView()
+        if (year <1945){
+            yearET.error = resources.getString(R.string.yearError1)
+            validation = false
+        }
+        else if(year > Calendar.getInstance().get(Calendar.YEAR)){
+            yearET.error = resources.getString(R.string.yearError2)
+            validation = false
+        }
+
+
+        if (typeOfEngine == EngineType.NONE) {
+            //Toast.makeText(mContext, R.string.engineError, Toast.LENGTH_LONG).show()
+            validation = false
+        }
+        if (typeOfCar == CarType.NONE) {
+            //Toast.makeText(mContext, R.string.carError, Toast.LENGTH_LONG).show()
+            validation = false
+        }
+
+        return validation
+
+    }
+
     private fun capSelectedView(): Double {
+        var capacity: Double = 0.0
+        try {
+            capacity = capacityET.text.toString().toDouble()
+        } catch (e: NumberFormatException) {
+            capacityET.error = resources.getString(R.string.doubleError)
+        } catch (e: Throwable) {
+            capacityET.error = resources.getString(R.string.error)
+        }
+
+        return capacity
+    }
+    private fun powerSelectedView(): Int {
+        var power: Int = 0
+        try {
+            power = powerET.text.toString().toInt()
+        }
+        catch (e: NumberFormatException) {
+            powerET.error = resources.getString(R.string.intError)
+        }
+        catch (e: Throwable) {
+            powerET.error = resources.getString(R.string.error)
+        }
+
+        return power
+    }
+    private fun yearSelectedView(): Int {
+        var year: Int = 0
+        try {
+            year = yearET.text.toString().toInt()
+        }
+        catch (e: NumberFormatException) {
+            yearET.error = resources.getString(R.string.yearError)
+        }
+        catch (e: Throwable) {
+            yearET.error = resources.getString(R.string.error)
+        }
+
+        return year
+    }
+
+   /* private fun capSelectedView(): Double {
         var capacity: Double = 0.0
         try {
             capacity = capacityET.text.toString().toDouble()
@@ -150,6 +320,8 @@ class UpdateActivity : AppCompatActivity() {
 
         return year
     }
+
+    */
     private fun getIndex(spinner: Spinner, myString: String): Int {
         var index: Int = 0
         var h = spinner.count - 1
@@ -203,9 +375,12 @@ class UpdateActivity : AppCompatActivity() {
         yearET = findViewById(R.id.yearEditTextUp)
         capacityET = findViewById(R.id.capEditTextUp)
         powerET = findViewById(R.id.powerEditTextUp)
-        colorET = findViewById(R.id.colorEditTextUp)
+        colorBT = findViewById(R.id.colorButtonUp)
         engTypeSpinner = findViewById(R.id.engTypeSpinnerUp)
         carTypeSpinner = findViewById(R.id.carTypeSpinnerUp)
+
+        capacityET.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(1))
+        powerET.filters = arrayOf<InputFilter>(MaxLengthInputFilter(4))
 
         updateBtn = findViewById(R.id.updateBtnUp)
 
@@ -223,6 +398,6 @@ class UpdateActivity : AppCompatActivity() {
         yearET.text = Editable.Factory.getInstance().newEditable(car.year.toString())
         capacityET.text = Editable.Factory.getInstance().newEditable(car.engCap.toString())
         powerET.text = Editable.Factory.getInstance().newEditable(car.power.toString())
-        colorET.text = Editable.Factory.getInstance().newEditable(car.color)
+        colorBT.setBackgroundColor(Color.parseColor(car.color))
     }
 }

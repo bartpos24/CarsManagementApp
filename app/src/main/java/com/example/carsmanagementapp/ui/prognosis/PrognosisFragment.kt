@@ -3,9 +3,8 @@ package com.example.carsmanagementapp.ui.prognosis
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import androidx.lifecycle.ViewModelProvider
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,9 +19,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.carsmanagementapp.Model.Car
 import com.example.carsmanagementapp.R
 import com.example.carsmanagementapp.repositories.DatabaseRepository
-import com.example.carsmanagementapp.ui.cars.CarsAdapter
 
-class PrognosisFragment : Fragment(), OnCarClickListner {
+class PrognosisFragment : Fragment(), OnCarClickListner, OnCarLongClickListener {
 
     private lateinit var prognosisViewModelFactory: PrognosisViewModelFactory
     private lateinit var prognosisViewModel: PrognosisViewModel
@@ -60,7 +58,7 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
         prognosisViewModel.carsLiveData.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 cars = it
-                prognosisAdapter = PrognosisAdapter(cars, this)
+                prognosisAdapter = PrognosisAdapter(cars, this, this)
                 recyclerView.adapter = prognosisAdapter
             }
         })
@@ -78,10 +76,22 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
         })*/
         compareBtn.setOnClickListener {
             if (listToPrognosis.size == 2) {
-                var betterCar = prognosisViewModel.prognosisValidation(listToPrognosis[0], listToPrognosis[1])
 
-                var otherPrognosis = prognosisViewModel.otherPrognosis(listToPrognosis[0], listToPrognosis[1])
-                showBetterDialog(betterCar)
+                //var betterCar  = prognosisViewModel.prognosisValidation(listToPrognosis[0], listToPrognosis[1])
+                var betterCar = prognosisViewModel.otherPrognosis(listToPrognosis[0], listToPrognosis[1])
+                var worseCar:Car
+
+                if(betterCar.equals(listToPrognosis[0])) {
+
+                    worseCar=listToPrognosis[1]
+
+                }
+                else
+                {
+
+                    worseCar=listToPrognosis[0]
+                }
+                showBetterDialog(betterCar,worseCar)
             }
             else {
                 Toast.makeText(mContext, R.string.compareEror, Toast.LENGTH_LONG).show()
@@ -104,32 +114,77 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
         carToCompare(item)
 
     }
-
+    
     private fun carToCompare(item: Car) {
         if (listToPrognosis.size < 2) {
 
             if (listToPrognosis.size == 1 && listToPrognosis[0] == item) {
                 listToPrognosis.remove(listToPrognosis[0])
-                Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
+               // Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
             else {
                 listToPrognosis.add(item)
-                Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
+                //Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
 
         }
         else {
             if (listToPrognosis[0] == item) {
                 listToPrognosis.remove(listToPrognosis[0])
-                Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
+                //Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
             else if (listToPrognosis[1] == item) {
                 listToPrognosis.remove(listToPrognosis[1])
-                Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
+               // Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
             else
-                Toast.makeText(mContext, R.string.chooseCars, Toast.LENGTH_LONG).show()
+            {
+                // Toast.makeText(mContext, R.string.chooseCars, Toast.LENGTH_LONG).show()
+            }
+
         }
+    }
+    override fun onItemLongClick(item: Car, position: Int)
+    {
+        showCarDetails(item)
+    }
+    private fun showCarDetails(Car: Car)
+    {
+        val builder = AlertDialog.Builder(mContext)
+        builder.setTitle(R.string.prognosisCarDetails)
+
+        val inflater = LayoutInflater.from(mContext)
+        val view = inflater.inflate(R.layout.car_detail_layout, null)
+
+        val selectedBrandTV = view.findViewById<TextView>(R.id.selectedBrandTV)
+        val selectedModelTV = view.findViewById<TextView>(R.id.selectedModelTV)
+        val selectedEngTypeTV = view.findViewById<TextView>(R.id.selectedEngineTypeTV)
+        val selectedCarTypeTV = view.findViewById<TextView>(R.id.selectedCarTypeTV)
+        val selectedColorTV = view.findViewById<TextView>(R.id.selectedColorTV)
+        val selectedCapacityTV = view.findViewById<TextView>(R.id.selectedCapacityTV)
+        val selectedPowerTV = view.findViewById<TextView>(R.id.selectedPowerTV)
+        val selectedYearTV = view.findViewById<TextView>(R.id.selectedYearTV)
+
+        selectedBrandTV.text = Car.brand
+        selectedModelTV.text = Car.model
+        selectedColorTV.setBackgroundColor(Color.parseColor(Car.color))
+        selectedPowerTV.text = Car.power.toString()
+        selectedCapacityTV.text = Car.engCap.toString()
+        selectedEngTypeTV.text = Car.engType.toString()
+        selectedYearTV.text = Car.year.toString()
+        selectedCarTypeTV.text = Car.carType.toString()
+
+
+
+        builder.setView(view)
+        val alert = builder.create()
+
+        builder.setPositiveButton("X", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                alert.cancel()
+            }
+        })
+        alert.show()
     }
     /*holder.itemView.setOnClickListener {
 
@@ -143,30 +198,45 @@ class PrognosisFragment : Fragment(), OnCarClickListner {
         mContext = context
     }
 
-    private fun showBetterDialog(car: Car) {
+    private fun showBetterDialog(betterCar: Car, worseCar: Car) {
         val builder = AlertDialog.Builder(mContext)
         builder.setTitle(R.string.prognosisResult)
+
 
         val inflater = LayoutInflater.from(mContext)
         val view = inflater.inflate(R.layout.better_car_layout, null)
 
-        val brandTV = view.findViewById<TextView>(R.id.brandTV)
-        val modelTV = view.findViewById<TextView>(R.id.modelTV)
-        val engTypeTV = view.findViewById<TextView>(R.id.engineTypeTV)
-        val carTypeTV = view.findViewById<TextView>(R.id.carTypeTV)
-        val colorTV = view.findViewById<TextView>(R.id.colorTV)
-        val capacityTV = view.findViewById<TextView>(R.id.capacityTV)
-        val powerTV = view.findViewById<TextView>(R.id.powerTV)
-        val yearTV = view.findViewById<TextView>(R.id.yearTV)
+        val betterBrandTV = view.findViewById<TextView>(R.id.betterBrandTV)
+        val betterModelTV = view.findViewById<TextView>(R.id.betterModelTV)
+        val betterEngTypeTV = view.findViewById<TextView>(R.id.betterEngineTypeTV)
+        val betterCarTypeTV = view.findViewById<TextView>(R.id.betterCarTypeTV)
+        val betterCapacityTV = view.findViewById<TextView>(R.id.betterCapacityTV)
+        val betterPowerTV = view.findViewById<TextView>(R.id.betterPowerTV)
+        val betterYearTV = view.findViewById<TextView>(R.id.betterYearTV)
 
-        brandTV.text = car.brand
-        modelTV.text = car.model
-        colorTV.text = car.color
-        powerTV.text = car.power.toString()
-        capacityTV.text = car.engCap.toString()
-        engTypeTV.text = car.engType.toString()
-        yearTV.text = car.year.toString()
-        carTypeTV.text = car.carType.toString()
+        val worseBrandTV = view.findViewById<TextView>(R.id.worseBrandTV)
+        val worseModelTV = view.findViewById<TextView>(R.id.worseModelTV)
+        val worseEngTypeTV = view.findViewById<TextView>(R.id.worseEngineTypeTV)
+        val worseCarTypeTV = view.findViewById<TextView>(R.id.worseCarTypeTV)
+        val worseCapacityTV = view.findViewById<TextView>(R.id.worseCapacityTV)
+        val worsePowerTV = view.findViewById<TextView>(R.id.worsePowerTV)
+        val worseYearTV = view.findViewById<TextView>(R.id.worseYearTV)
+
+        betterBrandTV.text = betterCar.brand
+        betterModelTV.text = betterCar.model
+        betterPowerTV.text = betterCar.power.toString()
+        betterCapacityTV.text = betterCar.engCap.toString()
+        betterEngTypeTV.text = betterCar.engType.toString()
+        betterYearTV.text = betterCar.year.toString()
+        betterCarTypeTV.text = betterCar.carType.toString()
+
+        worseBrandTV.text = worseCar.brand
+        worseModelTV.text = worseCar.model
+        worsePowerTV.text = worseCar.power.toString()
+        worseCapacityTV.text = worseCar.engCap.toString()
+        worseEngTypeTV.text = worseCar.engType.toString()
+        worseYearTV.text = worseCar.year.toString()
+        worseCarTypeTV.text = worseCar.carType.toString()
 
         builder.setView(view)
         val alert = builder.create()

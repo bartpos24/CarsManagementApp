@@ -2,6 +2,7 @@ package com.example.carsmanagementapp.ui.cars.dateails
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
@@ -119,7 +120,7 @@ class DetailsActivity : AppCompatActivity() {
     private fun displayCar(car: Car) {
         brandTV.text = car.brand
         modelTV.text = car.model
-        colorTV.text = car.color
+        colorTV.setBackgroundColor(Color.parseColor(car.color))
         capacityTV.text = car.engCap.toString()
         powerTV.text = car.power.toString()
         yearTV.text = car.year.toString()

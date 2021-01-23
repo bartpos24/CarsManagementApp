@@ -25,6 +25,7 @@ class DatabaseRepository {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
+                    actualCarList.clear()
                     for (h in snapshot.children) {
                         var car = h.getValue(Car::class.java)
                         actualCarList.add(car!!)

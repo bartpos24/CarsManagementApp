@@ -26,6 +26,9 @@
     <string name="e_enter_password">Please enter a password</string>
     <string name="e_login_fail">Login failed! Check email and password!</string>
     <string name="login_success">Successful login</string>
+    <string name="net_err_title">No internet connection.</string>
+    <string name="net_err_btn_ok">OK</string>
+
 
     //Register activity
     <string name="register_button">Register</string>
@@ -65,13 +68,16 @@
     <string name="doubleError">Capacity must be Double data</string>
     <string name="intError">Power must be Integer data</string>
     <string name="yearError">Year must be Integer data</string>
-    <string name="error">Please enter invalid data</string>
+    <string name="error">Please enter valid data</string>
     <string name="brandError">Please enter a brand</string>
     <string name="modelError">Please enter a model</string>
     <string name="colorError">Please enter a color</string>
     <string name="capacityError">Capacity must be greater than zero</string>
+    <string name="capacityError2">Capacity cannot be greater than 10.0</string>
     <string name="powerError">Power must be greater than zero</string>
-    <string name="yearError1">Year must be greater than zero</string>
+    <string name="powerError2">Power cannot be greater than 1000</string>
+    <string name="yearError1">Year must be greater than 1945</string>
+    <string name="yearError2">Year cannot be greater than actual</string>
     <string name="carError">Please select car type</string>
     <string name="engineError">Please select engine type</string>
     <string name="add">Added car</string>
@@ -148,7 +154,8 @@
     <string name="compareBtn">Compare</string>
     <string name="compareEror">Please select two cars to compare</string>
     <string name="chooseCars">Selected two cars. Uncheck one of them and check other or compare them.</string>
-    <string name="prognosisResult">Better car is:</string>
+    <string name="prognosisResult">Car comparison:</string>
+    <string name="prognosisCarDetails">Car details:</string>
 
 
     //UpdateActivity
@@ -156,6 +163,11 @@
     <string name="errorUpdate">Update error</string>
     <string name="carFindError">Does not have this car</string>
     <string name="carLoadError">Load car error</string>
+
+    //ColorPicker
+    <string name="colorpicker_header">Choose a color</string>
+    <string name="colorpicker_accept">Accept</string>
+    <string name="colorpicker_decline">Decline</string>
 
 
 

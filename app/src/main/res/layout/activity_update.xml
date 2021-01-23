@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cars.dateails.update.UpdateActivity">
+    tools:context=".ui.cars.dateails.update.UpdateActivity"
+    android:background="@drawable/background_gradient">
 
 
     <TextView
@@ -74,7 +75,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="@string/capEditText"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:layout_marginLeft="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/capacityUp" />
@@ -107,7 +108,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="@string/powerEditText"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/powerTextView"
         app:layout_constraintTop_toBottomOf="@+id/powerUp" />
 
@@ -142,7 +143,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="@string/yearEditText"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/powerEditTextUp" />
@@ -158,18 +159,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/yearUp" />
 
-    <EditText
-        android:id="@+id/colorEditTextUp"
+    <Button
+        android:id="@+id/colorButtonUp"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:ems="10"
-        android:gravity="center"
-        android:hint="@string/colorEditText"
-        android:inputType="textPersonName"
+        android:text=""
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearEditTextUp" />
+        app:layout_constraintTop_toBottomOf="@+id/yearEditTextUp"/>
 
     <TextView
         android:id="@+id/engineTypeUp"
@@ -200,7 +199,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorEditTextUp" />
+        app:layout_constraintTop_toBottomOf="@+id/colorButtonUp" />
 
     <Spinner
         android:id="@+id/carTypeSpinnerUp"

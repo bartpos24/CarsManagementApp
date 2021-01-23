@@ -1,23 +1,25 @@
 package com.example.carsmanagementapp.ui.login
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Patterns
+import android.view.Gravity
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.carsmanagementapp.MainActivity
 import com.example.carsmanagementapp.R
 import com.example.carsmanagementapp.repositories.AuthenticationRepository
 import com.example.carsmanagementapp.ui.register.RegisterActivity
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -57,10 +59,50 @@ class LoginActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        var user = loginViewModel.getCurrentUser()
-        if (user != null) {
-            updateUI(user)
+        if(isOnline(this))
+        {
+            var user = loginViewModel.getCurrentUser()
+            if (user != null) {
+                updateUI(user)
+            }
         }
+        else
+        {
+
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage(resources.getString(R.string.net_err_title))
+                .setNeutralButton(resources.getString(R.string.net_err_btn_ok),
+                    DialogInterface.OnClickListener { dialog, id ->
+                        finishAffinity()
+                    })
+                .setOnDismissListener { finishAffinity() }
+            builder.create()
+            builder.show()
+        }
+    }
+
+
+    private fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+
+            if (capabilities != null) {
+                when {
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+                        return true
+                    }
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
+                        return true
+                    }
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
 
     private fun initUI() {

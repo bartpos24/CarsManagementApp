@@ -15,12 +15,13 @@
     <string name="loadDatabaseError">Nie można pobrać danych</string>
 
     //Login activity
-    //Login activity
     <string name="email_editText">E-mail</string>
     <string name="password_editText">Hasło</string>
     <string name="login_text">Zaloguj się</string>
     <string name="signUp_text">"Nie mam konta"</string>
     <string name="login_success">Logowanie zakończone pomyślnie</string>
+    <string name="net_err_title">Brak połączenia z internetem.</string>
+    <string name="net_err_btn_ok">OK</string>
 
     //Register activity
     <string name="register_button">Rejestracja</string>
@@ -71,8 +72,11 @@
     <string name="modelError">Proszę wprowadzić model</string>
     <string name="colorError">Proszę wprowadzić kolor</string>
     <string name="capacityError">Pojemność musi być większa od zera</string>
+    <string name="capacityError2">Pojemność nie może być większa niż 10.0</string>
     <string name="powerError">Moc silnika musi być większa od zera</string>
-    <string name="yearError1">Rok produkcji musi być większy od zera</string>
+    <string name="powerError2">Moc silnika nie może być większa niż 1000</string>
+    <string name="yearError1">Rok produkcji musi być większy od 1945</string>
+    <string name="yearError2">Rok produkcji nie może być większy od aktualnego</string>
     <string name="carError">Proszę wybrać typ samochodu</string>
     <string name="engineError">Proszę wybrać typ silnika</string>
     <string name="addingFailed">Dodawanie nie powiodło się, spróbuj ponownie</string>
@@ -152,7 +156,8 @@
     <string name="compareBtn">Porównaj</string>
     <string name="compareEror">Proszę wybrać dwa samochody do porównania</string>
     <string name="chooseCars">Wybierz dwa samochody. Odznacz jeden i wybierz inny</string>
-    <string name="prognosisResult">Lepszy samochód to:</string>
+    <string name="prognosisResult">Porównanie samochodów:</string>
+    <string name="prognosisCarDetails">Informacje o samochodzie:</string>
 
 
     //UpdateActivity
@@ -160,5 +165,10 @@
     <string name="errorUpdate">Aktualizacja nie powiodła się</string>
     <string name="carFindError">Does not have this car</string>
     <string name="carLoadError">Load car error</string>
+
+    //ColorPicker
+    <string name="colorpicker_header">Wybierz kolor</string>
+    <string name="colorpicker_accept">Akceptuj</string>
+    <string name="colorpicker_decline">Odrzuć</string>
 
 </resources>

@@ -15,6 +15,7 @@ class CarsViewModel(private val repository: DatabaseRepository) : ViewModel() {
     val carsMessageLiveData = MutableLiveData<Int>()
 
     fun getDatabase() {
+
         repository.loadDatabase(object : ResponseDatabaseAction{
             override fun onSuccess(cars: ArrayList<Car>) {
                 carsLiveData.value = cars

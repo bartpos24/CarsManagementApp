@@ -1,14 +1,16 @@
 package com.example.carsmanagementapp.ui.addCar
 
-import android.R.layout
+import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
+import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -17,10 +19,15 @@ import com.example.carsmanagementapp.Model.Enum.CarType
 import com.example.carsmanagementapp.Model.Enum.EngineType
 import com.example.carsmanagementapp.R
 import com.example.carsmanagementapp.repositories.DatabaseRepository
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
-import java.lang.NumberFormatException
-import java.lang.StringBuilder
+import com.example.carsmanagementapp.utils.DecimalDigitsInputFilter
+import com.example.carsmanagementapp.utils.MaxLengthInputFilter
+import com.skydoves.colorpickerview.ColorPickerView
+import com.skydoves.colorpickerview.flag.BubbleFlag
+import com.skydoves.colorpickerview.flag.FlagMode
+import com.skydoves.colorpickerview.listeners.ColorListener
+import com.skydoves.colorpickerview.sliders.BrightnessSlideBar
+import kotlinx.android.synthetic.main.color_picker.view.*
+import java.util.*
 
 
 class AddCar : Fragment() {
@@ -35,11 +42,12 @@ class AddCar : Fragment() {
     private lateinit var capEditText: EditText
     private lateinit var powerEditText: EditText
     private lateinit var yearEditText: EditText
-    private lateinit var colorEditText: EditText
+    private lateinit var colorButton: Button
     private lateinit var addCarButton: Button
     private lateinit var mContext: Context
     private var typeOfEngine: EngineType = EngineType.NONE
     private var typeOfCar: CarType = CarType.NONE
+    private var colorstr:String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +63,10 @@ class AddCar : Fragment() {
         capEditText = view!!.findViewById(R.id.capEditText)
         powerEditText = view!!.findViewById(R.id.powerEditText)
         yearEditText = view!!.findViewById(R.id.yearEditText)
-        colorEditText = view!!.findViewById(R.id.colorEditText)
+        colorButton = view!!.findViewById(R.id.colorButton)
+
+        capEditText.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(1))
+        powerEditText.filters = arrayOf<InputFilter>(MaxLengthInputFilter(4))
 
         val repository = DatabaseRepository()
         addCarViewModelFactory = AddViewModelFactory(repository)
@@ -121,24 +132,69 @@ class AddCar : Fragment() {
             }
         }
 
+        colorButton.setOnClickListener {
+            val builder = AlertDialog.Builder(mContext)
+            builder.setTitle(R.string.colorpicker_header)
+
+            val inflater = LayoutInflater.from(mContext)
+            val view = inflater.inflate(R.layout.color_picker, null)
+            val btAccept =  view.findViewById<TextView>(R.id.BtAccept)
+            val btDecline =  view.findViewById<TextView>(R.id.BtDecline)
+            var tempColor:String = ""
+            val colorPicker = view.findViewById<ColorPickerView>(R.id.colorPickerView)
+            colorPicker.selectCenter()
+            val bubbleFlag = BubbleFlag(this.context)
+            bubbleFlag.flagMode = FlagMode.FADE
+            colorPicker.setFlagView(bubbleFlag)
+
+            val brightnessSlideBar = view.findViewById<BrightnessSlideBar>(R.id.brightnessSlideBar)
+
+
+            colorPicker.attachBrightnessSlider(brightnessSlideBar)
+
+
+            builder.setView(view)
+            val alert = builder.create()
+
+
+            colorPicker.setColorListener(ColorListener { color, fromUser ->
+
+
+                tempColor = String.format("#%06X", 0xFFFFFF and color)
+
+            })
+
+            btAccept.setOnClickListener {
+                colorstr = tempColor
+                colorButton.setBackgroundColor(Color.parseColor(tempColor))
+                colorButton.text = ""
+                alert.cancel();
+            }
+
+            btDecline.setOnClickListener {
+                alert.cancel();
+            }
+            alert.show()
+        }
+
         addCarButton.setOnClickListener {
-            val car = Car("", brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, capEditText.text.toString().toDouble(), powerEditText.text.toString().toInt(), yearEditText.text.toString().toInt(), typeOfEngine, colorEditText.text.toString())
-            addCarViewModel.addCar(car)
-            clearUI()
-/*
+           // val car = Car("", brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, capEditText.text.toString().toDouble(), powerEditText.text.toString().toInt(), yearEditText.text.toString().toInt(), typeOfEngine, colorEditText.text.toString())
+           // addCarViewModel.addCar(car)
+           // clearUI()
+
             var validation = validationCar()
-            if (validation == true) {
-                val car = Car("", brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, capEditText.text.toString().toDouble(), powerEditText.text.toString().toInt(), yearEditText.text.toString().toInt(), typeOfEngine, colorEditText.text.toString())
+            if (validation) {
+                val car = Car("", brandEditText.text.toString(), modelEditText.text.toString(), typeOfCar, capEditText.text.toString().toDouble(), powerEditText.text.toString().toInt(), yearEditText.text.toString().toInt(), typeOfEngine, colorstr)
                 addCarViewModel.addCar(car)
-                var sb = StringBuilder()
-                sb.append(R.string.add).append(" ").append(car.brand).append(" ").append(car.model)
-                Toast.makeText(mContext, sb, Toast.LENGTH_LONG).show()
+                //var sb = StringBuilder()
+                //sb.append(R.string.add).append(" ").append(car.brand).append(" ").append(car.model)
+                //Toast.makeText(mContext, sb, Toast.LENGTH_LONG).show()
                 clearUI()
             }
             else {
+                //Toast.makeText(mContext, R.string.addingFailed, Toast.LENGTH_LONG).show()
 
             }
-                Toast.makeText(mContext, R.string.addingFailed, Toast.LENGTH_LONG).show()*/
         }
         addCarViewModel.carsMessageLiveData.observe(viewLifecycleOwner, Observer {
             Toast.makeText(mContext, it, Toast.LENGTH_LONG).show()
@@ -156,25 +212,42 @@ class AddCar : Fragment() {
             modelEditText.error = resources.getString(R.string.modelError)
             validation = false
         }
-        if (colorEditText.text.toString() == "") {
-            colorEditText.error = resources.getString(R.string.colorError)
+        colorButton.error = null
+        if (colorstr == "") {
+            colorButton.error = resources.getString(R.string.colorError)
             validation = false
         }
         var cap = capSelectedView()
-        var pow = powerSelectedView()
-        var year = yearSelectedView()
-        if (cap == 0.0 || cap < 0.0) {
+
+        if (cap <= 0.0) {
             capEditText.error = resources.getString(R.string.capacityError)
             validation = false
         }
+        else if(cap > 10.0)
+        {
+            capEditText.error = resources.getString(R.string.capacityError2)
+            validation = false
+        }
+        var pow = powerSelectedView()
         if (pow == 0 || pow < 0) {
             powerEditText.error = resources.getString(R.string.powerError)
             validation = false
         }
-        if (year == 0 || year < 0) {
+        else if(pow > 1000)
+        {
+            powerEditText.error = resources.getString(R.string.powerError2)
+            validation = false
+        }
+        var year = yearSelectedView()
+        if (year <1945){
             yearEditText.error = resources.getString(R.string.yearError1)
             validation = false
         }
+        else if(year > Calendar.getInstance().get(Calendar.YEAR)){
+            yearEditText.error = resources.getString(R.string.yearError2)
+            validation = false
+        }
+
 
         if (typeOfEngine == EngineType.NONE) {
             Toast.makeText(mContext, R.string.engineError, Toast.LENGTH_LONG).show()
@@ -207,7 +280,8 @@ class AddCar : Fragment() {
         capEditText.text.clear()
         powerEditText.text.clear()
         yearEditText.text.clear()
-        colorEditText.text.clear()
+        colorButton.text = "Color"
+        colorstr=""
         engTypeSpinner.setSelection(0)
         carTypeSpinner.setSelection(0)
     }
