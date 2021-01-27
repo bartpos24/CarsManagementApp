@@ -25,15 +25,12 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var registerViewModel: RegisterViewModel
     private lateinit var registerViewModelFactory: RegisterViewModelFactory
-    private lateinit var auth: FirebaseAuth
     private lateinit var registerButton: Button
     private lateinit var nameEditText: EditText
     private lateinit var surnameEditText: EditText
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var repeatPasswordEditText: EditText
-    private lateinit var database: FirebaseDatabase
-    private lateinit var ref: DatabaseReference
     private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,13 +41,9 @@ class RegisterActivity : AppCompatActivity() {
         registerViewModelFactory = RegisterViewModelFactory(repository)
         registerViewModel = ViewModelProviders.of(this, registerViewModelFactory).get(RegisterViewModel::class.java)
 
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
-        ref = database.getReference("Users")
         initUI()
         registerButton.setOnClickListener {
             registerUser()
-            clearUI()
         }
         registerViewModel.registerMesageLiveData.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
@@ -121,6 +114,7 @@ class RegisterActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         val user = User(nameEditText.text.toString(), surnameEditText.text.toString(), emailEditText.text.toString())
         registerViewModel.register(emailEditText.text.toString(), passwordEditText.text.toString(), user)
+        clearUI()
         progressBar.visibility = View.GONE
     }
 }

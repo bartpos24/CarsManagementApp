@@ -99,14 +99,14 @@ class PrognosisViewModel(private val repository: DatabaseRepository) : ViewModel
     }
 
     fun otherPrognosis(car1: Car, car2: Car): Car {
-        var capCar1 = (1/(0.3 * sqrt(2 * PI))) * Math.E * (-(car1.engCap - 2.0).pow(2)/(2 * (0.3).pow(2)))
-        var capCar2 = (1/(0.3 * sqrt(2 * PI))) * Math.E * (-(car2.engCap - 2.0).pow(2)/(2 * (0.3).pow(2)))
+        var capCar1 = (1/(0.3 * sqrt(2 * PI))) * Math.E.pow (-(car1.engCap - 2.0).pow(2)/(2 * (0.3).pow(2)))
+        var capCar2 = (1/(0.3 * sqrt(2 * PI))) * Math.E.pow (-(car2.engCap - 2.0).pow(2)/(2 * (0.3).pow(2)))
 
-        var powerCar1 = (1/(60 * sqrt(2 * PI))) * Math.E * (-(car1.power - 150.0).pow(2)/(2 * (60.0).pow(2)))
-        var powerCar2 = (1/(60 * sqrt(2 * PI))) * Math.E * (-(car2.power - 150.0).pow(2)/(2 * (60.0).pow(2)))
+        var powerCar1 = (1/(60 * sqrt(2 * PI))) * Math.E.pow (-(car1.power - 150.0).pow(2)/(2 * (60.0).pow(2)))
+        var powerCar2 = (1/(60 * sqrt(2 * PI))) * Math.E.pow (-(car2.power - 150.0).pow(2)/(2 * (60.0).pow(2)))
 
-        var yearCar1 = (1/(5 * sqrt(2 * PI))) * Math.E * (-(car1.year - 2019.0).pow(2)/(2 * (5.0).pow(2)))
-        var yearCar2 = (1/(5 * sqrt(2 * PI))) * Math.E * (-(car2.year - 2019.0).pow(2)/(2 * (5.0).pow(2)))
+        var yearCar1 = (1/(5 * sqrt(2 * PI))) * Math.E.pow (-(car1.year - 2019.0).pow(2)/(2 * (5.0).pow(2)))
+        var yearCar2 = (1/(5 * sqrt(2 * PI))) * Math.E.pow (-(car2.year - 2019.0).pow(2)/(2 * (5.0).pow(2)))
 
         var gaussCapMin: Double
         var gaussPowerMin: Double

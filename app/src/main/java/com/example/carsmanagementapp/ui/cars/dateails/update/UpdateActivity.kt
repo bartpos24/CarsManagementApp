@@ -148,27 +148,7 @@ class UpdateActivity : AppCompatActivity() {
                 //Potencjalna obsługa błędu
 
             }
-            /*var cap = capSelectedView()
-            var pow = powerSelectedView()
-            var year = yearSelectedView()
-            if (cap != 0.0 && pow != 0 && year != 0 && typeOfEngine != EngineType.NONE && typeOfCar != CarType.NONE) {
-                if (brandET.text.toString() == "") {
-                    brandET.error = resources.getString(R.string.brandError)
-                }
-                else if (modelET.text.toString() == "") {
-                    modelET.error = resources.getString(R.string.modelError)
-                }
-                else if (colorET.text.toString() == "") {
-                    colorET.error = resources.getString(R.string.colorError)
-                }
-                else {
-                    val car = Car(car.id, brandET.text.toString(), modelET.text.toString(), typeOfCar, cap, pow, year, typeOfEngine, colorET.text.toString())
-                    updateViewModel.updateCar(car)
 
-                }
-
-            }
-            */
         }
 
         updateViewModel.messageLiveData.observe(this, Observer {
@@ -224,11 +204,9 @@ class UpdateActivity : AppCompatActivity() {
 
 
         if (typeOfEngine == EngineType.NONE) {
-            //Toast.makeText(mContext, R.string.engineError, Toast.LENGTH_LONG).show()
             validation = false
         }
         if (typeOfCar == CarType.NONE) {
-            //Toast.makeText(mContext, R.string.carError, Toast.LENGTH_LONG).show()
             validation = false
         }
 
@@ -277,51 +255,7 @@ class UpdateActivity : AppCompatActivity() {
         return year
     }
 
-   /* private fun capSelectedView(): Double {
-        var capacity: Double = 0.0
-        try {
-            capacity = capacityET.text.toString().toDouble()
-        }
-        catch (e: NumberFormatException) {
-            Toast.makeText(this, R.string.doubleError, Toast.LENGTH_LONG).show()
-        }
-        catch (e: Throwable) {
-            Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-        }
 
-        return capacity
-
-    }
-    private fun powerSelectedView(): Int {
-        var power: Int = 0
-        try {
-            power = powerET.text.toString().toInt()
-        }
-        catch (e: NumberFormatException) {
-            Toast.makeText(this, R.string.intError, Toast.LENGTH_LONG).show()
-        }
-        catch (e: Throwable) {
-            Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-        }
-
-        return power
-    }
-    private fun yearSelectedView(): Int {
-        var year: Int = 0
-        try {
-            year = yearET.text.toString().toInt()
-        }
-        catch (e: NumberFormatException) {
-            Toast.makeText(this, R.string.yearError, Toast.LENGTH_LONG).show()
-        }
-        catch (e: Throwable) {
-            Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show()
-        }
-
-        return year
-    }
-
-    */
     private fun getIndex(spinner: Spinner, myString: String): Int {
         var index: Int = 0
         var h = spinner.count - 1
@@ -399,5 +333,7 @@ class UpdateActivity : AppCompatActivity() {
         capacityET.text = Editable.Factory.getInstance().newEditable(car.engCap.toString())
         powerET.text = Editable.Factory.getInstance().newEditable(car.power.toString())
         colorBT.setBackgroundColor(Color.parseColor(car.color))
+
+        colorstr=car.color
     }
 }

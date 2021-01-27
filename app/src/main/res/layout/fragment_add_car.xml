@@ -1,230 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cars.dateails.update.UpdateActivity"
-    android:background="@drawable/background_gradient">
+    android:background="@drawable/background_gradient"
+    tools:context=".ui.cars.dateails.update.UpdateActivity">
 
 
-
-
-
-    <TextView
-        android:id="@+id/brandUp"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:text="@string/brand"
-        android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/brandEditText"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="40dp"
-        android:gravity="center"
-        android:ems="10"
-        android:hint="@string/brandEditText"
-        android:inputType="textPersonName"
+    <LinearLayout
+        android:id="@+id/llBrand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/modelUp"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="40dp"
+
+        <TextView
+            android:id="@+id/brandUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="clip_horizontal|center_vertical"
+            android:text="@string/brand" />
+
+        <EditText
+            android:id="@+id/brandEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/brandEditText"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llModel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llBrand">
+
+        <TextView
+            android:id="@+id/modelUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="@string/model" />
+
+        <EditText
+            android:id="@+id/modelEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/modelEditText"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llGroup1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/llModel"
+        tools:layout_editor_absoluteX="10dp">
+
+        <LinearLayout
+            android:id="@+id/llCapacity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/capacityUp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/capacity" />
+
+            <LinearLayout
+                android:id="@+id/llCapET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/capEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/capEditText"
+                    android:inputType="numberDecimal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/capacityUp" />
+
+
+                <TextView
+                    android:id="@+id/capTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="dm3"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPower"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/powerUp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/power" />
+
+            <LinearLayout
+                android:id="@+id/llPowET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/powerEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/powerEditText"
+                    android:inputType="number" />
+
+                <TextView
+                    android:id="@+id/powerTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:text="KM"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="@string/model"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/brandUp" />
+        app:layout_constraintTop_toBottomOf="@+id/llGroup1">
 
-    <EditText
-        android:id="@+id/modelEditText"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
+        <TextView
+            android:id="@+id/yearUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="@string/year" />
+
+        <EditText
+            android:id="@+id/yearEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/yearEditText"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llColor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/modelEditText"
-        android:inputType="textPersonName"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/brandEditText" />
-
-    <TextView
-        android:id="@+id/capacityUp"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="@string/capacity"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modelUp" />
+        app:layout_constraintTop_toBottomOf="@+id/llYear">
 
-    <EditText
-        android:id="@+id/capEditText"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="40dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/capEditText"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/capacityUp" />
-
-    <TextView
-        android:id="@+id/capTextView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="dm3"
-        android:textSize="15dp"
-        app:layout_constraintStart_toEndOf="@+id/capEditText"
-        app:layout_constraintTop_toBottomOf="@+id/capacityUp" />
-
-    <TextView
-        android:id="@+id/powerUp"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="@string/power"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modelEditText" />
-
-    <EditText
-        android:id="@+id/powerEditText"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/powerEditText"
-        android:inputType="number"
-        app:layout_constraintEnd_toStartOf="@+id/powerTextView"
-        app:layout_constraintTop_toBottomOf="@+id/powerUp" />
-
-    <TextView
-        android:id="@+id/powerTextView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="40dp"
-        android:gravity="center"
-        android:text="KM"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/powerUp" />
+        <TextView
+            android:id="@+id/colorUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="@string/color" />
 
 
-    <TextView
-        android:id="@+id/yearUp"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="@string/year"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/capEditText" />
+        <Button
+            android:id="@+id/colorButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@string/color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yearEditText" />
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/yearEditText"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="@string/yearEditText"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/powerEditText" />
+    <LinearLayout
+        android:id="@+id/llGroup2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
 
-    <TextView
-        android:id="@+id/colorUp"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="@string/color"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearUp" />
-
-
-    <Button
-        android:id="@+id/colorButton"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:text="@string/color"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yearEditText"/>
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/llColor">
+    <LinearLayout
+        android:id="@+id/llEngineType"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/llColor">
 
     <TextView
         android:id="@+id/engineTypeUp"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
         android:text="@string/engType"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/colorUp" />
 
-    <Spinner
-        android:id="@+id/engTypeSpinner"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:layout_marginLeft="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/engineTypeUp" />
+        <Spinner
+            android:id="@+id/engTypeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/engineTypeUp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llCarType"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/llEngineType">
 
     <TextView
         android:id="@+id/carTypeUp"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/engType"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/colorButton" />
+        android:text="@string/carType" />
 
-    <Spinner
-        android:id="@+id/carTypeSpinner"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carTypeUp" />
+        <Spinner
+            android:id="@+id/carTypeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+    </LinearLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/addCarButton"
         android:layout_width="120dp"
         android:layout_height="40dp"
-        android:text="@string/addCarButton"
         android:layout_marginTop="30dp"
+        android:text="@string/addCarButton"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/engTypeSpinner" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/llGroup2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

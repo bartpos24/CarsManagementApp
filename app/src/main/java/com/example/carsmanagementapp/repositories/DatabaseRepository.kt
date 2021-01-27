@@ -31,7 +31,6 @@ class DatabaseRepository {
                         actualCarList.add(car!!)
                     }
                     callback.onSuccess(actualCarList)
-                    //actualCars.value = actualCarList
                 }
             }
         })
@@ -49,7 +48,6 @@ class DatabaseRepository {
                         soldedCarList.add(car!!)
                     }
                     callback.onSuccess(soldedCarList)
-                    //soldedCars.value = soldedCarList
                 }
             }
         })

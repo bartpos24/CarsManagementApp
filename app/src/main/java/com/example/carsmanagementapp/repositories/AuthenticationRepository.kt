@@ -17,7 +17,6 @@ class AuthenticationRepository {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val refUser: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
-    private val actualUser: MutableLiveData<FirebaseUser> = MutableLiveData<FirebaseUser>()
 
     fun login(email: String, password: String, callback: ResponseAuthentication){
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
@@ -45,6 +44,8 @@ class AuthenticationRepository {
                             callback.onMessage(R.string.e_sign_up_fail)
                     }
             }
+            else
+                callback.onMessage(R.string.e_sign_up_fail)
 
         }
     }

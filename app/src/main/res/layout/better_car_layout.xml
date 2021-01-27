@@ -34,7 +34,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/worseBrandTV"
@@ -42,7 +43,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
 
     </LinearLayout>
 
@@ -74,7 +76,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/worseModelTV"
@@ -82,7 +85,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
     </LinearLayout>
 
     <LinearLayout
@@ -113,7 +117,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/worseCarTypeTV"
@@ -121,7 +126,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
     </LinearLayout>
 
     <LinearLayout
@@ -152,7 +158,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/worseEngineTypeTV"
@@ -160,7 +167,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
     </LinearLayout>
 
     <LinearLayout
@@ -191,7 +199,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/worseCapacityTV"
@@ -199,7 +208,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
     </LinearLayout>
 
     <LinearLayout
@@ -230,7 +240,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/worsePowerTV"
@@ -238,7 +249,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
     </LinearLayout>
 
 
@@ -272,7 +284,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/worseYearTV"
@@ -280,7 +293,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000"/>
     </LinearLayout>
 
 

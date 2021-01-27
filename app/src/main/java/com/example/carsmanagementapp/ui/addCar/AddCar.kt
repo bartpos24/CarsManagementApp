@@ -66,7 +66,7 @@ class AddCar : Fragment() {
         colorButton = view!!.findViewById(R.id.colorButton)
 
         capEditText.filters = arrayOf<InputFilter>(DecimalDigitsInputFilter(1))
-        powerEditText.filters = arrayOf<InputFilter>(MaxLengthInputFilter(4))
+        powerEditText.filters = arrayOf<InputFilter>(MaxLengthInputFilter(3))
 
         val repository = DatabaseRepository()
         addCarViewModelFactory = AddViewModelFactory(repository)
@@ -223,7 +223,7 @@ class AddCar : Fragment() {
             capEditText.error = resources.getString(R.string.capacityError)
             validation = false
         }
-        else if(cap > 10.0)
+        else if(cap > 9.9)
         {
             capEditText.error = resources.getString(R.string.capacityError2)
             validation = false
@@ -233,7 +233,7 @@ class AddCar : Fragment() {
             powerEditText.error = resources.getString(R.string.powerError)
             validation = false
         }
-        else if(pow > 1000)
+        else if(pow > 999)
         {
             powerEditText.error = resources.getString(R.string.powerError2)
             validation = false

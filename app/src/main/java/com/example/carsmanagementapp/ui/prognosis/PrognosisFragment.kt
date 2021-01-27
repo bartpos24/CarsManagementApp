@@ -48,13 +48,6 @@ class PrognosisFragment : Fragment(), OnCarClickListner, OnCarLongClickListener 
         prognosisViewModelFactory = PrognosisViewModelFactory(repository)
         prognosisViewModel = ViewModelProviders.of(this, prognosisViewModelFactory).get(PrognosisViewModel::class.java)
 
-        /*prognosisViewModel.loadDatabase().observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                cars = it
-                prognosisAdapter = PrognosisAdapter(cars, this)
-                recyclerView.adapter = prognosisAdapter
-            }
-        })*/
         prognosisViewModel.carsLiveData.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 cars = it
@@ -66,18 +59,11 @@ class PrognosisFragment : Fragment(), OnCarClickListner, OnCarLongClickListener 
             Toast.makeText(mContext, it, Toast.LENGTH_LONG).show()
         })
 
-        /*prognosisViewModel.actualCarList.observe(viewLifecycleOwner, {
-            if (it != null) {
-                cars = it
-                Log.i("Cars", it.size.toString())
-                prognosisAdapter = PrognosisAdapter(cars, this)
-                recyclerView.adapter = prognosisAdapter
-            }
-        })*/
+
         compareBtn.setOnClickListener {
             if (listToPrognosis.size == 2) {
 
-                //var betterCar  = prognosisViewModel.prognosisValidation(listToPrognosis[0], listToPrognosis[1])
+
                 var betterCar = prognosisViewModel.otherPrognosis(listToPrognosis[0], listToPrognosis[1])
                 var worseCar:Car
 
@@ -120,26 +106,18 @@ class PrognosisFragment : Fragment(), OnCarClickListner, OnCarLongClickListener 
 
             if (listToPrognosis.size == 1 && listToPrognosis[0] == item) {
                 listToPrognosis.remove(listToPrognosis[0])
-               // Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
             else {
                 listToPrognosis.add(item)
-                //Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
 
         }
         else {
             if (listToPrognosis[0] == item) {
                 listToPrognosis.remove(listToPrognosis[0])
-                //Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
             }
             else if (listToPrognosis[1] == item) {
                 listToPrognosis.remove(listToPrognosis[1])
-               // Toast.makeText(mContext, listToPrognosis.toString(), Toast.LENGTH_LONG).show()
-            }
-            else
-            {
-                // Toast.makeText(mContext, R.string.chooseCars, Toast.LENGTH_LONG).show()
             }
 
         }
@@ -186,13 +164,6 @@ class PrognosisFragment : Fragment(), OnCarClickListner, OnCarLongClickListener 
         })
         alert.show()
     }
-    /*holder.itemView.setOnClickListener {
-
-            //if ()
-            *//*val intent = Intent(holder.itemView.context, DetailsActivity::class.java)
-            intent.putExtra("id", allCars.get(position).id)
-            holder.itemView.context.startActivity(intent)*//*
-        }*/
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context

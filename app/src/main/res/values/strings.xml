@@ -73,9 +73,9 @@
     <string name="modelError">Please enter a model</string>
     <string name="colorError">Please enter a color</string>
     <string name="capacityError">Capacity must be greater than zero</string>
-    <string name="capacityError2">Capacity cannot be greater than 10.0</string>
+    <string name="capacityError2">Capacity cannot be greater than 9.9</string>
     <string name="powerError">Power must be greater than zero</string>
-    <string name="powerError2">Power cannot be greater than 1000</string>
+    <string name="powerError2">Power cannot be greater than 999</string>
     <string name="yearError1">Year must be greater than 1945</string>
     <string name="yearError2">Year cannot be greater than actual</string>
     <string name="carError">Please select car type</string>
