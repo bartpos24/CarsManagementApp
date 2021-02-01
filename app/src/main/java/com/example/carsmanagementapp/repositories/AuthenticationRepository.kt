@@ -26,7 +26,6 @@ class AuthenticationRepository {
             }
             else
                 callback.onMessage(R.string.e_login_fail)
-
         }
     }
     fun register(email: String, password: String, userToDatabase: User, callback: ResponseAuthentication) {

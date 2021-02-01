@@ -5,11 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="ui.login.LoginActivity"
     android:background="@drawable/background_gradient">
-
-
     <EditText
         android:id="@+id/email_editText"
         android:layout_width="match_parent"
@@ -24,7 +21,6 @@
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/password_editText"
         android:layout_width="match_parent"
@@ -40,7 +36,6 @@
         android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_editText" />
-
     <Button
         android:id="@+id/loginButton"
         android:layout_width="150dp"
@@ -51,14 +46,12 @@
         android:layout_marginTop="30dp"
         android:background="@color/colorPrimary"
         android:padding="10dp"
-
         android:text="@string/login_text"
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_editText"
         tools:text="@string/login_text" />
-
     <Button
 
         android:id="@+id/registerButton"
@@ -70,7 +63,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@string/signUp_text" />
-
     <ProgressBar
         android:id="@+id/progressBarLogin"
         android:layout_width="wrap_content"

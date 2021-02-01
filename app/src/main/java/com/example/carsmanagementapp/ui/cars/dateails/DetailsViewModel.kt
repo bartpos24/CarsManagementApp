@@ -17,13 +17,11 @@ class DetailsViewModel(private val repository: DatabaseRepository): ViewModel() 
             override fun onSuccess(car: Car) {
                 carLiveData.value = car
             }
-
             override fun onMessage(message: Int) {
                 messageLiveData.value = message
             }
         })
     }
-
     fun soldCar(car: Car) {
         repository.soldCar(car, object : ResponseDetailsAction {
             override fun onSuccess(car: Car) {}
@@ -32,7 +30,6 @@ class DetailsViewModel(private val repository: DatabaseRepository): ViewModel() 
             }
         })
     }
-
     fun deleteCar(car: Car) {
         repository.deleteCar(car, object : ResponseDetailsAction {
             override fun onSuccess(car: Car) {}

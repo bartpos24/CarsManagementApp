@@ -58,7 +58,6 @@ class DatabaseRepository {
             override fun onCancelled(error: DatabaseError) {
                 callback.onMessage(carLoadError)
             }
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (h in snapshot.children) {
@@ -71,7 +70,6 @@ class DatabaseRepository {
             }
         })
     }
-
     fun addCar(car: Car, callback: ResponseDatabaseAction) {
         var id = refCar.push().key
         car.id = id!!
@@ -106,7 +104,6 @@ class DatabaseRepository {
                 }
             }
         }
-
     }
     fun updateCar(car: Car, callback: ResponseDatabaseAction) {
         refCar.child(car.id).setValue(car).addOnCompleteListener {

@@ -37,9 +37,10 @@ class CarsFragment : Fragment() {
         val repository = DatabaseRepository()
         carsViewModelFactory = CarsViewModelFactory(repository)
         carsViewModel = ViewModelProviders.of(this, carsViewModelFactory).get(CarsViewModel::class.java)
-        carsMenager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView = view.findViewById(R.id.recyclerAllCars) as RecyclerView
 
+
+        carsMenager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = carsMenager
 
 
@@ -53,10 +54,8 @@ class CarsFragment : Fragment() {
         carsViewModel.carsMessageLiveData.observe(viewLifecycleOwner, Observer {
             Toast.makeText(mContext, it, Toast.LENGTH_LONG).show()
         })
-
         return view
     }
-
     override fun onStart() {
         super.onStart()
         carsViewModel.getDatabase()

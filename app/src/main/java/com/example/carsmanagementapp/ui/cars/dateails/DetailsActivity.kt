@@ -50,14 +50,17 @@ class DetailsActivity : AppCompatActivity() {
         val repository = DatabaseRepository()
         detailsViewModelFactory = DetailsViewModelFactory(repository)
         detailsViewModel = ViewModelProviders.of(this, detailsViewModelFactory).get(DetailsViewModel::class.java)
-        var id = intent.getStringExtra("id")
 
+
+        var id = intent.getStringExtra("id")
         detailsViewModel.getCar(id!!)
         detailsViewModel.carLiveData.observe(this, Observer {
             car = it
             displayCar(car)
         })
-
+        detailsViewModel.messageLiveData.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
         updateBtn.setOnClickListener {
             if (modelTV.text != "") {
                 val intent = Intent(this, UpdateActivity::class.java)
@@ -66,8 +69,9 @@ class DetailsActivity : AppCompatActivity() {
             }
             else
                 Toast.makeText(this, R.string.updateError, Toast.LENGTH_LONG).show()
-
         }
+
+        
         soldBtn.setOnClickListener {
             if (modelTV.text != "") {
                 detailsViewModel.soldCar(car!!)
@@ -76,15 +80,11 @@ class DetailsActivity : AppCompatActivity() {
             else {
                 Toast.makeText(this, R.string.updateError, Toast.LENGTH_LONG).show()
             }
-
         }
-        detailsViewModel.messageLiveData.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-        })
+
         deleteBtn.setOnClickListener {
             if (modelTV.text != "") {
                 detailsViewModel.deleteCar(car!!)
-
                 clearET()
             }
             else {

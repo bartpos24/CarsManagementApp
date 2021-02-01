@@ -11,7 +11,6 @@ class LoginViewModel(private val repository: AuthenticationRepository): ViewMode
 
     val loginMessageLiveData = MutableLiveData<Int>()
     val userLiveData = MutableLiveData<FirebaseUser>()
-
     fun getLogin(email: String, password: String) {
         repository.login(email, password, object : ResponseAuthentication {
             override fun onSuccess(currentUser: FirebaseUser) {

@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
     <com.skydoves.colorpickerview.ColorPickerView
         android:id="@+id/colorPickerView"
         android:layout_width="200dp"
@@ -15,7 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:preference_attachBrightnessSlideBar="true" />
-
     <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
         android:id="@+id/brightnessSlideBar"
         android:layout_width="200dp"
@@ -27,7 +25,6 @@
         app:layout_constraintStart_toStartOf="@+id/colorPickerView"
         app:layout_constraintTop_toBottomOf="@+id/colorPickerView"
         app:selector_BrightnessSlider="@drawable/wheel" />
-
     <Button
         android:id="@+id/BtAccept"
         android:layout_width="wrap_content"

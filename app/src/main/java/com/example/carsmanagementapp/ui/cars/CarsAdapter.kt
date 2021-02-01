@@ -17,12 +17,9 @@ class CarsAdapter(var allCars: List<Car>) : RecyclerView.Adapter<CarsViewHolder>
 
         return CarsViewHolder(cellForRow)
     }
-
     override fun getItemCount(): Int = allCars.size
-
     override fun onBindViewHolder(holder: CarsViewHolder, position: Int) {
         val currentItem = allCars[position]
-
         holder.brand.text = currentItem.brand
         holder.model.text = currentItem.model
         holder.year.text = currentItem.year.toString()

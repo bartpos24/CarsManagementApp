@@ -8,15 +8,11 @@
     android:orientation="vertical"
     tools:context=".ui.cars.CarsFragment"
     android:background="@drawable/background_gradient">
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:background="@color/grey2"
         android:orientation="horizontal">
-
         <TextView
             android:id="@+id/brandHeader"
             android:layout_width="match_parent"
@@ -46,7 +42,6 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="15sp" />
-
         <TextView
             android:id="@+id/yearHeader"
             android:layout_width="match_parent"
@@ -61,17 +56,12 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="15sp" />
-
     </LinearLayout>
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_weight="1"
         android:id="@+id/recyclerAllCars"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical" >
-
     </androidx.recyclerview.widget.RecyclerView>
-
 </LinearLayout>
